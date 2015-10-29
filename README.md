@@ -2,8 +2,8 @@
 
 Check out this repository and execute `make`, i.e. like this:
 
-    git clone https://github.com/freifunkMUC/site-ffm.git site-ffm
-    cd site-ffm
+    git clone https://github.com/tecff/site.git site
+    cd site
     make
 
 ## Further Resources
