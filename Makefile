@@ -7,6 +7,7 @@ SECRET_KEY_FILE ?= ${HOME}/.gluon-secret-key
 GLUON_TARGETS ?= \
 	ar71xx-generic \
 	ar71xx-nand \
+	mpc85xx-generic \
 	x86-generic \
 	x86-kvm_guest
 
@@ -27,7 +28,7 @@ all: info
 info:
 	@echo
 	@echo '#########################'
-	@echo '# FFMUC Firmare build'
+	@echo '# TECFF Firmware build'
 	@echo '# Building release ${GLUON_RELEASE} for branch ${GLUON_BRANCH}'
 	@echo
 

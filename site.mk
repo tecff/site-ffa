@@ -23,8 +23,8 @@ GLUON_SITE_PACKAGES := \
 	gluon-status-page \
 	iwinfo \
 	iptables \
-	haveged 
-#	gluon-ebtables-filter-arp-ffmuc \
+	haveged \
+	gluon-ebtables-filter-arp-ffmuc 
 #	gluon-ebtables-filter-multicast-ffmuc
 
 
