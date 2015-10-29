@@ -1,4 +1,8 @@
-# Freifunk München Firmware Changelog
+# Freifunk Altdorf Firmware Changelog
+
+## v2015.6.4
+- Makefile added mpc85xx-generic for powerPC based Router
+- Replaced Munich specifics with Altdorf
 
 ## v2015.5
  - Updated to Gluon 2015.1.1
