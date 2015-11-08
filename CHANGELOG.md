@@ -1,6 +1,6 @@
 # Freifunk Altdorf Firmware Changelog
 
-## v2015.6.4.2
+## v2015.7
  - replace dev-Gateway-Hostnames by currently not-in-use stable ones
  - add signing key for Buildserver
 
