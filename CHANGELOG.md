@@ -1,5 +1,9 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2015.6.4.2
+ - replace dev-Gateway-Hostnames by currently not-in-use stable ones
+ - add signing key for Buildserver
+
 ## v2015.6.4.1
  - add support for TP-Link TL-WR1043ND v3
 
