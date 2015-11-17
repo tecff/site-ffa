@@ -4,6 +4,7 @@
  - Updated to Gluon 2015.1.2
    - Changes: https://gluon.readthedocs.org/en/v2015.1.2/releases/v2015.1.2.html
  - Update site.conf
+   - raise number of necessary signatures (stable 3, experimental 2)
    - Update config syntax
    - Remove htmode option (dropped by gluon)
    - 802.11s support (disabled for now)
