@@ -3,6 +3,12 @@
 ## v2015.8 [not released yet]
  - Updated to Gluon 2015.1.2
    - Changes: https://gluon.readthedocs.org/en/v2015.1.2/releases/v2015.1.2.html
+ - Update site.conf
+   - Update config syntax
+   - Remove htmode option (dropped by gluon)
+   - 802.11s support (disabled for now)
+   - Set batman gw selection class to 3 (fast switch)
+   - Images are now placed in output/images
 
 ## v2015.7
  - replace dev-Gateway-Hostnames by currently not-in-use stable ones
