@@ -20,12 +20,12 @@ endif
 
 JOBS ?= $(shell cat /proc/cpuinfo | grep processor | wc -l)
 
-GLUON_MAKE := ${MAKE} -j ${JOBS} -C ${GLUON_BUILD_DIR} \
+GLUON_MAKEFLAGS := -C ${GLUON_BUILD_DIR} \
 			GLUON_RELEASE=${GLUON_RELEASE} \
 			GLUON_BRANCH=${GLUON_BRANCH}
 
 all: info
-	${MAKE} manifest
+	$(MAKE) manifest
 
 info:
 	@echo
@@ -35,13 +35,13 @@ info:
 	@echo
 
 build: gluon-prepare
-	for target in ${GLUON_TARGETS}; do \
+	+for target in ${GLUON_TARGETS}; do \
 		echo ""Building target $$target""; \
-		${GLUON_MAKE} GLUON_TARGET="$$target"; \
+		$(MAKE) ${GLUON_MAKEFLAGS} GLUON_TARGET="$$target"; \
 	done
 
 manifest: build
-	${GLUON_MAKE} manifest
+	$(MAKE) ${GLUON_MAKEFLAGS} manifest
 	mv ${GLUON_BUILD_DIR}/output .
 
 sign: manifest
@@ -56,7 +56,7 @@ gluon-prepare: output-clean ${GLUON_BUILD_DIR}
 	  && git fetch origin \
 	  && git checkout -q ${GLUON_GIT_REF})
 	ln -sfT .. ${GLUON_BUILD_DIR}/site
-	${GLUON_MAKE} update
+	$(MAKE) ${GLUON_MAKEFLAGS} update
 
 gluon-clean:
 	rm -rf ${GLUON_BUILD_DIR}
