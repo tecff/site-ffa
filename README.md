@@ -2,7 +2,7 @@
 
 Check out this repository and execute `make`, i.e. like this:
 
-    git clone https://github.com/tecff/site.git site
+    git clone https://github.com/tecff/site-ffa.git site
     cd site
     make
 
