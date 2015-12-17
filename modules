@@ -1,4 +1,7 @@
-GLUON_SITE_FEEDS='tecff_packages'
+GLUON_SITE_FEEDS='tecff_packages ssidchanger'
 
 PACKAGES_TECFF_PACKAGES_REPO=https://github.com/tecff/gluon-packages.git
 PACKAGES_TECFF_PACKAGES_COMMIT=79ee3c93acab6ebe0186831c519e81bf40328139
+
+PACKAGES_SSIDCHANGER_REPO=https://github.com/ffac/gluon-ssid-changer.git
+PACKAGES_SSIDCHANGER_COMMIT=439a71cb8d528fc1480fac9d031ef27d267b38f8

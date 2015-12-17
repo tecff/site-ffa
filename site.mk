@@ -24,7 +24,8 @@ GLUON_SITE_PACKAGES := \
 	iwinfo \
 	iptables \
 	haveged \
-	gluon-ebtables-filter-arp-ffmuc 
+	gluon-ebtables-filter-arp-ffmuc \
+	gluon-ssid-changer
 
 DEFAULT_GLUON_RELEASE := snapshot~$(shell date '+%Y%m%d')
 
