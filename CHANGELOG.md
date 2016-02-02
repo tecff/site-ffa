@@ -1,8 +1,9 @@
 # Freifunk Altdorf Firmware Changelog
 
-## v2015.8 [not released yet]
- - Updated to Gluon 2015.1.2
-   - Changes: https://gluon.readthedocs.org/en/v2015.1.2/releases/v2015.1.2.html
+## v2016.1 [not released yet]
+ - Updated to Gluon 2016.1
+   - Changes: https://gluon.readthedocs.org/en/v2016.1/releases/v2016.1.html
+ - change default ESSID to Freifunk
  - Update site.conf
    - raise number of necessary signatures (stable 3, experimental 2)
    - Update config syntax
@@ -10,6 +11,7 @@
    - 802.11s support (disabled for now)
    - Set batman gw selection class to 3 (fast switch)
    - Images are now placed in output/images
+ - add gluon-ssid-changer: nodes with bad TQ change their ESSID
 
 ## v2015.7
  - replace dev-Gateway-Hostnames by currently not-in-use stable ones
