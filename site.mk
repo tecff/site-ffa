@@ -1,7 +1,6 @@
 GLUON_SITE_PACKAGES := \
 	gluon-mesh-batman-adv-15 \
 	gluon-alfred \
-	gluon-announced \
 	gluon-autoupdater \
 	gluon-config-mode-autoupdater \
 	gluon-config-mode-contact-info \
@@ -19,6 +18,7 @@ GLUON_SITE_PACKAGES := \
 	gluon-mesh-vpn-fastd \
 	gluon-next-node \
 	gluon-radvd \
+	gluon-respondd \
 	gluon-setup-mode \
 	gluon-status-page \
 	haveged \
