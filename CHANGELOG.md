@@ -12,6 +12,7 @@
    - Set batman gw selection class to 3 (fast switch)
    - Images are now placed in output/images
  - add gluon-ssid-changer: nodes with bad TQ change their ESSID
+ - add x86-64 build-target
 
 ## v2015.7
  - replace dev-Gateway-Hostnames by currently not-in-use stable ones
