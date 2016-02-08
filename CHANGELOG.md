@@ -14,6 +14,7 @@
  - add gluon-ssid-changer: nodes with bad TQ change their ESSID
  - add x86-64 build-target
  - add support for several USB devices (& modular packaging)
+ - add support for Futro devices (useful offloader)
 
 ## v2015.7
  - replace dev-Gateway-Hostnames by currently not-in-use stable ones
