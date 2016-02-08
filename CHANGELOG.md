@@ -15,6 +15,7 @@
  - add x86-64 build-target
  - add support for several USB devices (& modular packaging)
  - add support for Futro devices (useful offloader)
+ - change default banner file
 
 ## v2015.7
  - replace dev-Gateway-Hostnames by currently not-in-use stable ones
