@@ -12,6 +12,9 @@
    - Set batman gw selection class to 3 (fast switch)
    - Images are now placed in output/images
    - reduce dependencies regarding firmware updates
+   - reduce dependencies regarding gateway connections
+   - change MTU to 1280 (solves issues with IPv6 & DS-Lite)
+   - allow IPv6 for gateway connections
  - add gluon-ssid-changer: nodes with bad TQ change their ESSID
  - add x86-64 build-target
  - add support for several USB devices (& modular packaging)
