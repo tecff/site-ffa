@@ -30,7 +30,8 @@ GLUON_SITE_PACKAGES := \
 	iptables \
 	iwinfo \
 	gluon-ebtables-filter-arp-ffmuc \
-	gluon-ssid-changer
+	gluon-ssid-changer \
+	tecff-banner
 
 # basic support for USB stack
 USB_PACKAGES_BASIC := \
