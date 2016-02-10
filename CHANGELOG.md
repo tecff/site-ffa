@@ -1,25 +1,21 @@
 # Freifunk Altdorf Firmware Changelog
 
-## v2016.1 [not released yet]
+## v2016.1
  - Updated to Gluon 2016.1
    - Changes: https://gluon.readthedocs.org/en/v2016.1/releases/v2016.1.html
- - change default ESSID to Freifunk
  - Update site.conf
-   - raise number of necessary signatures (stable 3, experimental 2)
-   - Update config syntax
-   - Remove htmode option (dropped by gluon)
-   - 802.11s support (disabled for now)
+   - change default ESSID to Freifunk
+   - raise number of necessary signatures for sysupgrade images
    - Set batman gw selection class to 3 (fast switch)
-   - Images are now placed in output/images
    - reduce dependencies regarding firmware updates
    - reduce dependencies regarding gateway connections
    - change MTU to 1280 (solves issues with IPv6 & DS-Lite)
    - allow IPv6 for gateway connections
  - add gluon-ssid-changer: nodes with bad TQ change their ESSID
  - add x86-64 build-target
- - add support for several USB devices (& modular packaging)
+ - add support for several USB devices
  - add support for Futro devices (useful offloader)
- - change default banner file
+ - use custom banner file
 
 ## v2015.7
  - replace dev-Gateway-Hostnames by currently not-in-use stable ones
