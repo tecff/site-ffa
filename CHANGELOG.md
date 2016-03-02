@@ -1,6 +1,6 @@
 # Freifunk Altdorf Firmware Changelog
 
-## v2016.1.1 [not released yet]
+## v2016.1.1
  - Updated to Gluon 2016.1.1
    - Changes: https://gluon.readthedocs.org/en/v2016.1.1/releases/v2016.1.1.html
  - add preserve wifi channels feature
