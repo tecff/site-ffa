@@ -89,6 +89,17 @@ USB_PACKAGES_NET := \
 #	kmod-usb-net-rtl8150 \
 #	kmod-usb-net-rtl8152 \
 
+# additional USB network devices (ie Edimax)
+USB_PACKAGES_NET_ADD := \
+	kmod-rtl8192cu \
+	kmod-rtl8187 \
+	kmod-ath9k-htc  \
+	kmod-ath9k-common \
+	kmod-ath \
+	kmod-rt73-usb \
+	kmod-carl9170 \
+	kmod-brcmfmac
+
 # network support for PCI devices
 PCI_PACKAGES_NET := \
 	kmod-3c59x \
@@ -135,7 +146,8 @@ GLUON_SITE_PACKAGES += \
 	$(USB_PACKAGES_STORAGE) \
 	$(USB_PACKAGES_NET) \
 	$(PCI_PACKAGES_NET) \
-	$(TOOLS_PACKAGES)
+	$(TOOLS_PACKAGES) \
+	$(USB_PACKAGES_NET_ADD)
 endif
 
 # x86-64
@@ -149,7 +161,32 @@ GLUON_SITE_PACKAGES += \
 	$(USB_PACKAGES_STORAGE) \
 	$(USB_PACKAGES_NET) \
 	$(PCI_PACKAGES_NET) \
-	$(TOOLS_PACKAGES)
+	$(TOOLS_PACKAGES) \
+	$(USB_PACKAGES_NET_ADD)
+endif
+
+# Raspberry Pi A/B/B+
+ifeq ($(GLUON_TARGET),brcm2708-bcm2708)
+GLUON_SITE_PACKAGES += \
+	kmod-usb-hid \
+	kmod-hid-generic \
+	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_STORAGE) \
+	$(USB_PACKAGES_NET) \
+	$(TOOLS_PACKAGES) \
+	$(USB_PACKAGES_NET_ADD)
+endif
+
+# Raspberry Pi 2
+ifeq ($(GLUON_TARGET),brcm2708-bcm2709)
+GLUON_SITE_PACKAGES += \
+	kmod-usb-hid \
+	kmod-hid-generic \
+	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_STORAGE) \
+	$(USB_PACKAGES_NET) \
+	$(TOOLS_PACKAGES) \
+	$(USB_PACKAGES_NET_ADD)
 endif
 
 # ar71xx-generic
