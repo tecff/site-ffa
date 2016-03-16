@@ -1,5 +1,12 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.1.2
+ - Updated to Gluon 2016.1.2
+   - Changes: https://gluon.readthedocs.org/en/v2016.1.2/releases/v2016.1.2.html
+ - support for TP-Link TL-WA7510N
+ - support for Raspberry Pi A/B/B+/2
+ - support for several additional USB networking devices
+
 ## v2016.1.1
  - Updated to Gluon 2016.1.1
    - Changes: https://gluon.readthedocs.org/en/v2016.1.1/releases/v2016.1.1.html
