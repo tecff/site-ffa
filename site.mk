@@ -83,11 +83,11 @@ USB_PACKAGES_NET := \
 	kmod-usb-net-pegasus \
 	kmod-usb-net-qmi-wwan \
 	kmod-usb-net-rndis \
+	kmod-usb-net-rtl8152 \
 	kmod-usb-net-sierrawireless \
 	kmod-usb-net-smsc95xx
 # broken
 #	kmod-usb-net-rtl8150 \
-#	kmod-usb-net-rtl8152 \
 
 # additional USB network devices (ie Edimax)
 USB_PACKAGES_NET_ADD := \
