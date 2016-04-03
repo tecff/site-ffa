@@ -1,5 +1,10 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.1.3
+ - Updated to Gluon 2016.1.3
+   - Changes: https://gluon.readthedocs.org/en/v2016.1.3/releases/v2016.1.3.html
+ - support for rtl8152 network chip used in USB networking devices
+
 ## v2016.1.2
  - Updated to Gluon 2016.1.2
    - Changes: https://gluon.readthedocs.org/en/v2016.1.2/releases/v2016.1.2.html
