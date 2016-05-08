@@ -31,7 +31,8 @@ GLUON_SITE_PACKAGES := \
 	iwinfo \
 	gluon-ebtables-filter-arp-ffmuc \
 	gluon-ssid-changer \
-	tecff-banner
+	tecff-banner \
+	tecff-ath9k-broken-wifi-workaround
 
 # basic support for USB stack
 USB_PACKAGES_BASIC := \
