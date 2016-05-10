@@ -31,6 +31,7 @@ GLUON_SITE_PACKAGES := \
 	iwinfo \
 	gluon-ebtables-filter-arp-ffmuc \
 	gluon-ssid-changer \
+	gluon-treatment \
 	tecff-banner \
 	tecff-ath9k-broken-wifi-workaround
 
