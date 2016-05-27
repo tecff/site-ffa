@@ -1,7 +1,7 @@
 GLUON_SITE_FEEDS='tecff ssidchanger'
 
 PACKAGES_TECFF_REPO=https://github.com/tecff/gluon-packages.git
-PACKAGES_TECFF_COMMIT=ffd114b3856d7ac731d880ae80245c97b8efff6e
+PACKAGES_TECFF_COMMIT=21fb2b15ed7c7b4602f3d73c62133d78b141643a
 
 PACKAGES_SSIDCHANGER_REPO=https://github.com/ffac/gluon-ssid-changer.git
 PACKAGES_SSIDCHANGER_BRANCH=chaos-calmer
