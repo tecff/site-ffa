@@ -1,5 +1,18 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.1.5
+ - Updated to Gluon 2016.1.5, includes 2016.1.4
+   - Changes: https://gluon.readthedocs.org/en/v2016.1.4/releases/v2016.1.4.html
+   - Changes: https://gluon.readthedocs.org/en/v2016.1.5/releases/v2016.1.5.html
+ - use the additional packages for D-Link DIR-505
+ - add workaround package/script for problems with ath9k wifi driver
+ - add package for special treatment of nodes
+ - remove support for 802.11b wifi
+ - remove support for slow wifi connections
+ - Update site.conf
+   - enable fastd mesh vpn by default
+   - add NTP servers IPv6 addresses as no-DNS-fallback 
+
 ## v2016.1.3
  - Updated to Gluon 2016.1.3
    - Changes: https://gluon.readthedocs.org/en/v2016.1.3/releases/v2016.1.3.html
