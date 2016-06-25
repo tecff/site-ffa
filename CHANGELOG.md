@@ -1,5 +1,8 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.1.5.1
+ - improve workaround package/script for problems with ath9k wifi driver
+
 ## v2016.1.5
  - Updated to Gluon 2016.1.5, includes 2016.1.4
    - Changes: https://gluon.readthedocs.org/en/v2016.1.4/releases/v2016.1.4.html
