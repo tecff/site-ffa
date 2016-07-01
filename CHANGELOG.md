@@ -1,5 +1,8 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.1.5.2
+ - improve workaround package/script for problems with ath9k wifi driver
+
 ## v2016.1.5.1
  - improve workaround package/script for problems with ath9k wifi driver
 
