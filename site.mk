@@ -29,11 +29,11 @@ GLUON_SITE_PACKAGES := \
 	haveged \
 	iptables \
 	iwinfo \
-	gluon-ebtables-filter-arp-ffmuc \
 	gluon-ssid-changer \
 	gluon-treatment \
 	tecff-ath9k-broken-wifi-workaround \
 	tecff-banner \
+	tecff-ebtables-net-rules \
 	tecff-respondd-watchdog
 
 # basic support for USB stack
