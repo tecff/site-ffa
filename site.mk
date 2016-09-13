@@ -30,7 +30,6 @@ GLUON_SITE_PACKAGES := \
 	iptables \
 	iwinfo \
 	gluon-ssid-changer \
-	gluon-treatment \
 	tecff-ath9k-broken-wifi-workaround \
 	tecff-banner \
 	tecff-ebtables-net-rules \
