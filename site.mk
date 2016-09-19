@@ -108,6 +108,7 @@ PCI_PACKAGES_NET := \
 	kmod-e1000 \
 	kmod-e1000e \
 	kmod-forcedeth \
+	kmod-igb \
 	kmod-natsemi \
 	kmod-ne2k-pci \
 	kmod-pcnet32 \
