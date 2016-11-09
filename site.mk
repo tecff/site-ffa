@@ -103,24 +103,6 @@ USB_PACKAGES_NET := \
 	kmod-usb-net-sierrawireless \
 	kmod-usb-net-smsc95xx
 
-# network support for PCI devices
-PCI_PACKAGES_NET := \
-	kmod-3c59x \
-	kmod-e100 \
-	kmod-e1000 \
-	kmod-e1000e \
-	kmod-forcedeth \
-	kmod-igb \
-	kmod-natsemi \
-	kmod-ne2k-pci \
-	kmod-pcnet32 \
-	kmod-r8169 \
-	kmod-sis900 \
-	kmod-sky2 \
-	kmod-tg3 \
-	kmod-tulip \
-	kmod-via-rhine
-
 #
 # $(GLUON_TARGET) specific settings:
 #
@@ -128,28 +110,26 @@ PCI_PACKAGES_NET := \
 # x86-generic
 ifeq ($(GLUON_TARGET),x86-generic)
 # support the usb stack on x86 devices
-# and add a few common USB and PCI NICs
+# and add a few common USB NICs
 GLUON_SITE_PACKAGES += \
 	kmod-usb-hid \
 	kmod-hid-generic \
 	$(USB_PACKAGES_BASIC) \
 	$(USB_PACKAGES_STORAGE) \
 	$(USB_PACKAGES_NET) \
-	$(PCI_PACKAGES_NET) \
 	$(MISC_PACKAGES)
 endif
 
 # x86-64
 ifeq ($(GLUON_TARGET),x86-64)
 # support the usb stack on x86-64 devices
-# and add a few common USB and PCI NICs
+# and add a few common USB NICs
 GLUON_SITE_PACKAGES += \
 	kmod-usb-hid \
 	kmod-hid-generic \
 	$(USB_PACKAGES_BASIC) \
 	$(USB_PACKAGES_STORAGE) \
 	$(USB_PACKAGES_NET) \
-	$(PCI_PACKAGES_NET) \
 	$(MISC_PACKAGES)
 endif
 
