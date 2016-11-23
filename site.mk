@@ -30,6 +30,7 @@ GLUON_SITE_PACKAGES := \
 	iwinfo \
 	gluon-ssid-changer \
 	tecff-ath9k-broken-wifi-workaround \
+	tecff-autoupdater-wifi-fallback \
 	tecff-banner \
 	tecff-ebtables-net-rules \
 	tecff-respondd-watchdog
