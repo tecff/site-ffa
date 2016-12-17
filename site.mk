@@ -28,12 +28,12 @@ GLUON_SITE_PACKAGES := \
 	haveged \
 	iptables \
 	iwinfo \
-	gluon-ssid-changer \
 	tecff-ath9k-broken-wifi-workaround \
 	tecff-autoupdater-wifi-fallback \
 	tecff-banner \
 	tecff-ebtables-net-rules \
-	tecff-respondd-watchdog
+	tecff-respondd-watchdog \
+	tecff-ssid-changer
 
 # basic support for USB stack
 USB_PACKAGES_BASIC := \
