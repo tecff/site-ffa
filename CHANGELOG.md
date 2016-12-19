@@ -1,5 +1,31 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.1.6
+ - Updated to Gluon 2016.1.6
+   - Changes: https://gluon.readthedocs.org/en/v2016.1.6/releases/v2016.1.6.html
+ - Updated site.conf
+   - add 2 additional placeholder fastd gws
+   - add 6th firmware signture key & replace one
+   - add option `additional_prefix6` (used by ebtables firewall)
+   - add repository for kernel modules for each build
+   - change domain for OpenWRT package downloads
+   - hide altitude field in config mode
+   - increase size of `prefix4` to /19
+ - add autoupdater fallback mode (uses wifi client mode)
+ - add autoupdater improvements from master branch
+ - add kmod-igb NIC driver, used e.g. on APU2
+ - add package for time-based (de-)activation of bandwidth limits
+ - add package for time-based (de-)activation of the client SSID
+ - add usb network drivers to more devices with enough space
+ - add watchdog package for crashing respondd
+ - improve workaround for problems with ath9k wifi driver
+ - improve Makefile: job count handling
+ - stronger ebtables firewall with tecff-ebtables-net-rules
+ - move external packages into tecff package feed & rename to avoid conflicts
+ - remove gluon-treatment
+ - remove gluon-alfred
+ - remove tools from build as manual installation is easy
+
 ## v2016.1.5.2
  - improve workaround package/script for problems with ath9k wifi driver
 
