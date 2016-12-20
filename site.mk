@@ -33,7 +33,6 @@ GLUON_SITE_PACKAGES := \
 	tecff-autoupdater-wifi-fallback \
 	tecff-banner \
 	tecff-ebtables-net-rules \
-	tecff-respondd-watchdog \
 	tecff-ssid-changer
 
 # misc packages, only on devices with 8MB flash or more
