@@ -43,6 +43,8 @@ MISC_PACKAGES := \
 # basic support for USB stack
 USB_PACKAGES_BASIC := \
 	kmod-usb-core \
+	kmod-usb-ohci \
+	kmod-usb-ohci-pci \
 	kmod-usb2 \
 	kmod-usb3
 
