@@ -43,7 +43,13 @@ MISC_PACKAGES := \
 # basic support for USB stack
 USB_PACKAGES_BASIC := \
 	kmod-usb-core \
-	kmod-usb2
+	kmod-usb2 \
+	kmod-usb3
+
+# support for USB input devices
+USB_PACKAGES_HID := \
+	kmod-usb-hid \
+	kmod-hid-generic
 
 # storage support for USB devices
 USB_PACKAGES_STORAGE := \
@@ -111,10 +117,8 @@ ifeq ($(GLUON_TARGET),x86-generic)
 # support the usb stack on x86 devices
 # and add a few common USB NICs
 GLUON_SITE_PACKAGES += \
-	kmod-usb-hid \
-	kmod-hid-generic \
-	kmod-usb3 \
 	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_HID) \
 	$(USB_PACKAGES_STORAGE) \
 	$(USB_PACKAGES_NET) \
 	$(MISC_PACKAGES)
@@ -125,10 +129,8 @@ ifeq ($(GLUON_TARGET),x86-64)
 # support the usb stack on x86-64 devices
 # and add a few common USB NICs
 GLUON_SITE_PACKAGES += \
-	kmod-usb-hid \
-	kmod-hid-generic \
-	kmod-usb3 \
 	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_HID) \
 	$(USB_PACKAGES_STORAGE) \
 	$(USB_PACKAGES_NET) \
 	$(MISC_PACKAGES)
@@ -137,9 +139,8 @@ endif
 # Raspberry Pi A/B/B+
 ifeq ($(GLUON_TARGET),brcm2708-bcm2708)
 GLUON_SITE_PACKAGES += \
-	kmod-usb-hid \
-	kmod-hid-generic \
 	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_HID) \
 	$(USB_PACKAGES_STORAGE) \
 	$(USB_PACKAGES_NET) \
 	$(MISC_PACKAGES)
@@ -148,9 +149,8 @@ endif
 # Raspberry Pi 2
 ifeq ($(GLUON_TARGET),brcm2708-bcm2709)
 GLUON_SITE_PACKAGES += \
-	kmod-usb-hid \
-	kmod-hid-generic \
 	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_HID) \
 	$(USB_PACKAGES_STORAGE) \
 	$(USB_PACKAGES_NET) \
 	$(MISC_PACKAGES)
