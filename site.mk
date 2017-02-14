@@ -30,6 +30,7 @@ GLUON_SITE_PACKAGES := \
 	iptables \
 	iwinfo \
 	tecff-ath9k-broken-wifi-workaround \
+	tecff-autoupdater-to-stable \
 	tecff-autoupdater-wifi-fallback \
 	tecff-banner \
 	tecff-ebtables-net-rules \
