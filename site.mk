@@ -45,7 +45,6 @@ MISC_PACKAGES := \
 USB_PACKAGES_BASIC := \
 	kmod-usb-core \
 	kmod-usb-ohci \
-	kmod-usb-ohci-pci \
 	kmod-usb2 \
 	kmod-usb3
 
@@ -124,7 +123,8 @@ GLUON_SITE_PACKAGES += \
 	$(USB_PACKAGES_HID) \
 	$(USB_PACKAGES_STORAGE) \
 	$(USB_PACKAGES_NET) \
-	$(MISC_PACKAGES)
+	$(MISC_PACKAGES) \
+	kmod-usb-ohci-pci
 endif
 
 # x86-64
@@ -136,7 +136,8 @@ GLUON_SITE_PACKAGES += \
 	$(USB_PACKAGES_HID) \
 	$(USB_PACKAGES_STORAGE) \
 	$(USB_PACKAGES_NET) \
-	$(MISC_PACKAGES)
+	$(MISC_PACKAGES) \
+	kmod-usb-ohci-pci
 endif
 
 # Raspberry Pi A/B/B+
