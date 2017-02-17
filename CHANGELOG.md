@@ -1,5 +1,27 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.2.3
+ - Updated to Gluon 2016.2.3 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.org/en/v2016.2/releases/v2016.2.html
+   - Changes: https://gluon.readthedocs.org/en/v2016.2.1/releases/v2016.2.1.html
+   - Changes: https://gluon.readthedocs.org/en/v2016.2.2/releases/v2016.2.2.html
+   - Changes: https://gluon.readthedocs.org/en/v2016.2.3/releases/v2016.2.3.html
+ - Updated site.conf
+    - activate 802.11s meshing standard parallel to ibss/adhoc
+    - add supported and basic rates to configuration
+    - remove update probability (obsolete since gluon 2016.1.x)
+ - activate support for 802.11s mesh on ath10k devices, e.g. Archer C7 & Unifi AP AC
+ - add confirmation request if contact or location are left blank in config-mode
+ - add migration of experimental nodes to stable branch
+ - add more NIC drivers to support e.g. IGEL UD5-2
+ - add support for flashing over vendor firmwares with region codes
+ - add USB1 device driver on x86
+ - add USB3 driver on x86
+ - improve descriptions for hostname, contact-info & geo-location in config-mode
+ - remove respondd-watchdog (fixed upstream)
+ - remove ssh password option from config-mode
+ - workaround for problems with ath9k wifi driver: start only every 10 minutes
+
 ## v2016.1.6
  - Updated to Gluon 2016.1.6
    - Changes: https://gluon.readthedocs.org/en/v2016.1.6/releases/v2016.1.6.html
