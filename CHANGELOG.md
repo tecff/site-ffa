@@ -1,5 +1,9 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.2.3.1
+ - disable ibss/adhoc meshing standard (replaced by 802.11s)
+ - fix sysupgrade on some systems (e.g. sdcard storage)
+
 ## v2016.2.3
  - Updated to Gluon 2016.2.3 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.org/en/v2016.2/releases/v2016.2.html
