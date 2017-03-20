@@ -1,5 +1,13 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.2.4
+ - Updated to Gluon 2016.2.4 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.org/en/v2016.2.4/releases/v2016.2.4.html
+ - Updated site.conf
+   - change TLD of openwrt opkg download proxy
+   - add static IPv4 & IPv6 addresses for fastd instances
+   - remove setting mesh_on_wan (is optional anyway)
+
 ## v2016.2.3.1
  - disable ibss/adhoc meshing standard (replaced by 802.11s)
  - fix sysupgrade on some systems (e.g. sdcard storage)
