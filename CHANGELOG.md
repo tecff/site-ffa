@@ -1,5 +1,9 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.2.4.1
+ - include fix for an upstream regression in 2016.2.4
+ - add a workaround package that reboots a node as a last measure
+
 ## v2016.2.4
  - Updated to Gluon 2016.2.4 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.org/en/v2016.2.4/releases/v2016.2.4.html
