@@ -38,6 +38,7 @@ GLUON_SITE_PACKAGES := \
 
 # misc packages, only on devices with 8MB flash or more
 MISC_PACKAGES := \
+	respondd-module-airtime \
 	tecff-aptimeclock \
 	tecff-vpnlimittimeclock
 
