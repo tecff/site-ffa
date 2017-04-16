@@ -6,12 +6,21 @@ SECRET_KEY_FILE ?= ${HOME}/.gluon-secret-key
 
 GLUON_TARGETS ?= \
 	ar71xx-generic \
+	ar71xx-mikrotik \
 	ar71xx-nand \
+	ar71xx-tiny \
 	brcm2708-bcm2708 \
 	brcm2708-bcm2709 \
+	ipq806x \
 	mpc85xx-generic \
+	mvebu \
+	ramips-mt7621 \
+	ramips-mt7628 \
+	ramips-rt305x \
+	sunxi \
 	x86-64 \
-	x86-generic
+	x86-generic \
+	x86-geode
 
 GLUON_RELEASE := $(shell git describe --tags 2>/dev/null)
 ifneq (,$(shell git describe --exact-match --tags 2>/dev/null))
