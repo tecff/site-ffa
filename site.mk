@@ -15,6 +15,7 @@ GLUON_SITE_PACKAGES := \
 	gluon-ebtables-filter-multicast \
 	gluon-ebtables-filter-ra-dhcp \
 	gluon-ebtables-segment-mld \
+	gluon-ebtables-source-filter \
 	gluon-web-admin \
 	gluon-web-autoupdater \
 	gluon-web-network \
@@ -32,7 +33,6 @@ GLUON_SITE_PACKAGES := \
 	tecff-autoupdater-to-stable \
 	tecff-autoupdater-wifi-fallback \
 	tecff-banner \
-	tecff-ebtables-net-rules \
 	tecff-general-workaround \
 	tecff-ssid-changer
 
