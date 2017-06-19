@@ -27,7 +27,6 @@ GLUON_SITE_PACKAGES := \
 	gluon-setup-mode \
 	gluon-status-page \
 	haveged \
-	iptables \
 	iwinfo \
 	tecff-ath9k-broken-wifi-workaround \
 	tecff-autoupdater-to-stable \
