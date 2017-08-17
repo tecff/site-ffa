@@ -1,5 +1,13 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.2.7
+ - Updated to Gluon v2016.2.7 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.org/en/v2016.2.4/releases/v2016.2.5.html
+   - Changes: https://gluon.readthedocs.org/en/v2016.2.4/releases/v2016.2.6.html
+   - Changes: https://gluon.readthedocs.org/en/v2016.2.4/releases/v2016.2.7.html
+ - Updated site.conf
+   - increase MTU to 1312
+
 ## v2016.2.4.1
  - include fix for an upstream regression in 2016.2.4
  - add a workaround package that reboots a node as a last measure
