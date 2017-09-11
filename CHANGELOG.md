@@ -1,5 +1,8 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2016.2.7.1
+ - include upstream fix for a problem with newer firmware of TL-WR1043ND v4
+
 ## v2016.2.7
  - Updated to Gluon v2016.2.7 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.org/en/v2016.2.5/releases/v2016.2.5.html
