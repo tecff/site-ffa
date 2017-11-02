@@ -188,6 +188,15 @@ GLUON_SITE_PACKAGES += \
 	$(MISC_PACKAGES)
 endif
 
+# ramips-mt7620
+ifeq ($(GLUON_TARGET),ramips-mt7620)
+GLUON_SITE_PACKAGES += \
+	$(USB_PACKAGES_BASIC) \
+	$(USB_PACKAGES_STORAGE) \
+	$(USB_PACKAGES_NET) \
+	$(MISC_PACKAGES)
+endif
+
 # ramips-mt7621
 ifeq ($(GLUON_TARGET),ramips-mt7621)
 GLUON_SITE_PACKAGES += \
