@@ -268,6 +268,15 @@ endif
 
 
 #
+# Device specific settings
+#
+
+# TP-Link Archer C25 v1
+GLUON_tp-link-archer-c25-v1_SITE_PACKAGES += \
+	tecff-archer-c25
+
+
+#
 # General settings
 #
 
