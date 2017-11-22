@@ -2,30 +2,25 @@
 # GLUON_SITE_PACKAGES modular definition
 #
 
+# features
+GLUON_FEATURES := \
+	autoupdater \
+	ebtables-filter-multicast \
+	ebtables-filter-ra-dhcp \
+	ebtables-segment-mld \
+	ebtables-source-filter \
+	mesh-batman-adv-15 \
+	mesh-vpn-fastd \
+	radvd \
+	respondd \
+	status-page \
+	web-advanced \
+	web-private-wifi \
+	web-wizard
+
 # base packages
 GLUON_SITE_PACKAGES := \
-	gluon-mesh-batman-adv-15 \
-	gluon-autoupdater \
-	gluon-config-mode-autoupdater \
-	gluon-config-mode-contact-info \
-	gluon-config-mode-core \
-	gluon-config-mode-geo-location \
-	gluon-config-mode-hostname \
-	gluon-config-mode-mesh-vpn \
-	gluon-ebtables-filter-multicast \
-	gluon-ebtables-filter-ra-dhcp \
-	gluon-ebtables-segment-mld \
-	gluon-ebtables-source-filter \
-	gluon-web-admin \
-	gluon-web-autoupdater \
-	gluon-web-network \
-	gluon-web-private-wifi \
-	gluon-web-wifi-config \
-	gluon-mesh-vpn-fastd \
-	gluon-radvd \
-	gluon-respondd \
-	gluon-setup-mode \
-	gluon-status-page \
+	-gluon-web-mesh-vpn-fastd \
 	haveged \
 	iwinfo \
 	tecff-ath9k-broken-wifi-workaround \
