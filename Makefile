@@ -14,6 +14,7 @@ GLUON_TARGETS ?= \
 	ipq806x \
 	mpc85xx-generic \
 	mvebu \
+	ramips-mt7620 \
 	ramips-mt7621 \
 	ramips-mt7628 \
 	ramips-rt305x \
