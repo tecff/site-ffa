@@ -11,6 +11,7 @@ GLUON_TARGETS ?= \
 	ar71xx-tiny \
 	brcm2708-bcm2708 \
 	brcm2708-bcm2709 \
+	brcm2708-bcm2710 \
 	ipq806x \
 	mpc85xx-generic \
 	mvebu \
