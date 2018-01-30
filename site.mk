@@ -402,6 +402,3 @@ GLUON_REGION ?= eu
 
 # Languages to include
 GLUON_LANGS ?= en de
-
-# meshing standard used on ath10k devices (ibss/11s)
-GLUON_ATH10K_MESH ?= 11s
