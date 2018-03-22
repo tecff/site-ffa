@@ -21,7 +21,6 @@ GLUON_FEATURES := \
 
 # base packages
 GLUON_SITE_PACKAGES := \
-	-gluon-web-mesh-vpn-fastd \
 	haveged \
 	iwinfo \
 	tecff-ath9k-broken-wifi-workaround \
