@@ -208,6 +208,12 @@ PCI_PACKAGES := \
 	kmod-usb-ohci-pci \
 	$(PCI_PACKAGES_NET)
 
+# x86 specific packages (more space available)
+X86_PACKAGES := \
+	$(PCI_PACKAGES) \
+	bash \
+	wget-nossl
+
 #
 # $(GLUON_TARGET) specific settings:
 #
@@ -360,24 +366,24 @@ endif
 ifeq ($(GLUON_TARGET),x86-64)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
-		$(PCI_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(MISC_PACKAGES) \
+		$(X86_PACKAGES)
 endif
 
 # x86-generic
 ifeq ($(GLUON_TARGET),x86-generic)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
-		$(PCI_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(MISC_PACKAGES) \
+		$(X86_PACKAGES)
 endif
 
 # x86-geode
 ifeq ($(GLUON_TARGET),x86-geode)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
-		$(PCI_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(MISC_PACKAGES) \
+		$(X86_PACKAGES)
 endif
 
 
