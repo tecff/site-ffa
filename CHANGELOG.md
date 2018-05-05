@@ -1,5 +1,36 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v2017.1.7
+ - Update to Gluon v2017.1.7 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.org/en/v2017.1/releases/v2017.1.html
+   - Changes: https://gluon.readthedocs.org/en/v2017.1.1/releases/v2017.1.1.html
+   - Changes: https://gluon.readthedocs.org/en/v2017.1.2/releases/v2017.1.2.html
+   - Changes: https://gluon.readthedocs.org/en/v2017.1.3/releases/v2017.1.3.html
+   - Changes: https://gluon.readthedocs.org/en/v2017.1.4/releases/v2017.1.4.html
+   - Changes: https://gluon.readthedocs.org/en/v2017.1.5/releases/v2017.1.5.html
+   - Changes: https://gluon.readthedocs.org/en/v2017.1.6/releases/v2017.1.6.html
+   - Changes: https://gluon.readthedocs.org/en/v2017.1.7/releases/v2017.1.7.html
+ - Update site.conf
+   - changes for Gluon v2017.1.x branch based on LEDE 17.01
+ - Update site.mk
+   - changes for Gluon v2017.1.x branch based on LEDE 17.01
+   - adjustments regarding new targets
+   - add new package respondd-module-airtime
+ - new targets:
+   - ar71xx-mikrotik
+   - ar71xx-tiny (for devices with only 4MB flash)
+   - ipq806x
+   - mvebu
+   - sunxi
+   - x86-geode
+ - update packages to work with Gluon v2017.1.x
+ - build targets ramips: mt7620, mt7628, rt350x as these aren't broken for tecff
+ - remove target x86-kvm_guest
+ - build Archer C25 by default (but with disabled 5GHz wifi)
+ - backport alias name for Ubiquiti UniFi Mesh
+ - switch to upstream solution to disable password-based ssh login
+ - replace custom tecff-ebtables-net-rules with upstream gluon-ebtables-source-filter
+
 ## v2016.2.7.1
  - include upstream fix for a problem with newer firmware of TL-WR1043ND v4
 
