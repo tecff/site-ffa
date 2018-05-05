@@ -275,16 +275,6 @@ ifeq ($(GLUON_TARGET),ar71xx-nand)
 		$(MISC_PACKAGES)
 endif
 
-# Raspberry Pi 3
-ifeq ($(GLUON_TARGET),brcm2708-bcm2710)
-GLUON_SITE_PACKAGES += \
-	$(USB_PACKAGES_BASIC) \
-	$(USB_PACKAGES_HID) \
-	$(USB_PACKAGES_STORAGE) \
-	$(USB_PACKAGES_NET) \
-	$(MISC_PACKAGES)
-endif
-
 # ipq806x
 ifeq ($(GLUON_TARGET),ipq806x)
 	GLUON_SITE_PACKAGES += \
@@ -347,6 +337,13 @@ endif
 
 # Raspberry Pi 2
 ifeq ($(GLUON_TARGET),brcm2708-bcm2709)
+	GLUON_SITE_PACKAGES += \
+		$(USB_PACKAGES) \
+		$(MISC_PACKAGES)
+endif
+
+# Raspberry Pi 3
+ifeq ($(GLUON_TARGET),brcm2708-bcm2710)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
 		$(MISC_PACKAGES)
