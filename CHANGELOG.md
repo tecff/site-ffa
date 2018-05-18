@@ -1,6 +1,11 @@
 # Freifunk Altdorf Firmware Changelog
 
-## v2017.1.7
+## v5.1
+ - Update site.conf
+   - use new paths for autoupdater
+   - introduce beta branch
+
+## v5
  - Update to Gluon v2017.1.7 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.org/en/v2017.1/releases/v2017.1.html
    - Changes: https://gluon.readthedocs.org/en/v2017.1.1/releases/v2017.1.1.html
