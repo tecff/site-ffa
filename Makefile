@@ -26,8 +26,8 @@ GLUON_TARGETS ?= \
 GLUON_RELEASE := $(shell git describe --tags 2>/dev/null)
 ifneq (,$(shell git describe --exact-match --tags 2>/dev/null))
   GLUON_BRANCH := stable
-else
-  GLUON_BRANCH := experimental
+else ifeq (,${GLUON_BRANCH})
+  GLUON_RELEASE := snapshot~$(shell date '+%Y%m%d')
 endif
 
 MAKE_PID := $(shell echo $$PPID)
