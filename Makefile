@@ -41,7 +41,10 @@ GLUON_MAKEFLAGS := -j${JOBS} -C ${GLUON_BUILD_DIR} \
 			GLUON_RELEASE=${GLUON_RELEASE} \
 			GLUON_BRANCH=${GLUON_BRANCH}
 
-all: info manifest
+# this special target makes sure that this Makefile is run serially
+.NOTPARALLEL:
+
+all: build move-output
 
 info:
 	@echo
@@ -50,17 +53,19 @@ info:
 	@echo '# Building release ${GLUON_RELEASE} for branch ${GLUON_BRANCH}'
 	@echo
 
-build: gluon-prepare
+build: info gluon-prepare
 	+for target in ${GLUON_TARGETS}; do \
 		echo ""Building target $$target""; \
 		$(MAKE) ${GLUON_MAKEFLAGS} GLUON_TARGET="$$target"; \
 	done
 
-manifest: build
+manifest:
 	$(MAKE) ${GLUON_MAKEFLAGS} manifest
+
+move-output:
 	mv ${GLUON_BUILD_DIR}/output .
 
-sign: manifest
+sign: build manifest move-output
 	${GLUON_BUILD_DIR}/contrib/sign.sh ${SECRET_KEY_FILE} output/images/sysupgrade/${GLUON_BRANCH}.manifest
 
 ${GLUON_BUILD_DIR}:
