@@ -50,28 +50,37 @@ info:
 	@echo
 	@echo '#########################'
 	@echo '# TECFF Firmware build'
-	@echo '# Building release ${GLUON_RELEASE} for branch ${GLUON_BRANCH}'
+	@echo '# GLUON_RELEASE: ${GLUON_RELEASE}'
+	@echo '# GLUON_BRANCH:  ${GLUON_BRANCH}'
+	@echo '# GLUON_GIT_URL: ${GLUON_GIT_URL}'
+	@echo '# GLUON_GIT_REF: ${GLUON_GIT_REF}'
+	@echo '#########################'
 	@echo
 
 build: info gluon-prepare
+	@echo '# starting builds...'
 	+for target in ${GLUON_TARGETS}; do \
 		echo ""Building target $$target""; \
 		$(MAKE) ${GLUON_MAKEFLAGS} GLUON_TARGET="$$target"; \
 	done
 
 manifest:
+	@echo '# creating manifest...'
 	$(MAKE) ${GLUON_MAKEFLAGS} manifest
 
 move-output:
+	@echo '# moving output out of build directory...'
 	mv ${GLUON_BUILD_DIR}/output .
 
 sign: build manifest move-output
+	@echo '# signing manifest...'
 	${GLUON_BUILD_DIR}/contrib/sign.sh ${SECRET_KEY_FILE} output/images/sysupgrade/${GLUON_BRANCH}.manifest
 
 ${GLUON_BUILD_DIR}:
 	git clone ${GLUON_GIT_URL} ${GLUON_BUILD_DIR}
 
 gluon-prepare: output-clean ${GLUON_BUILD_DIR}
+	@echo '# preparing sources...'
 	(cd ${GLUON_BUILD_DIR} \
 	  && git remote set-url origin ${GLUON_GIT_URL} \
 	  && git fetch origin \
@@ -80,9 +89,11 @@ gluon-prepare: output-clean ${GLUON_BUILD_DIR}
 	$(MAKE) ${GLUON_MAKEFLAGS} update
 
 gluon-clean:
+	@echo '# removing build directory...'
 	rm -rf ${GLUON_BUILD_DIR}
 
 output-clean:
+	@echo '# removing output of last build...'
 	rm -rf output
 
 clean: gluon-clean output-clean
