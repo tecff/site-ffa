@@ -1,5 +1,11 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v5.2
+ - Update to Gluon v2017.1.8 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.org/en/v2017.1.8/releases/v2017.1.8.html
+ - update some packages to improve reliability and facilitate debugging
+ - improve Makefile
+
 ## v5.1
  - Update site.conf
    - use new paths for autoupdater
