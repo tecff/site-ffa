@@ -57,3 +57,10 @@ msgstr ""
 
 msgid "gluon-config-mode:contact-note"
 msgstr "e.g. E-mail, phone number, nickname, website"
+
+msgid "gluon-config-mode:hostname-help"
+msgstr ""
+"Please enter the coordinates of your node here. "
+"The node will be displayed on the <a href=\"https://map.tecff.de/\" target=\"_blank\">map</a> "
+"using them. You may determine these two values by right-clicking "
+"on the node's planned location on the map."
