@@ -14,7 +14,7 @@ GLUON_TARGETS ?= \
 	brcm2708-bcm2710 \
 	ipq806x \
 	mpc85xx-generic \
-	mvebu \
+	mvebu-cortexa9 \
 	ramips-mt7620 \
 	ramips-mt7621 \
 	ramips-mt7628 \

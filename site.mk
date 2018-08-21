@@ -296,8 +296,8 @@ ifeq ($(GLUON_TARGET),mpc85xx-generic)
 		$(MISC_PACKAGES)
 endif
 
-# mvebu
-ifeq ($(GLUON_TARGET),mvebu)
+# mvebu-cortexa9
+ifeq ($(GLUON_TARGET),mvebu-cortexa9)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
 		$(MISC_PACKAGES)
