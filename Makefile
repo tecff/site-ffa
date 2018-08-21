@@ -12,6 +12,7 @@ GLUON_TARGETS ?= \
 	brcm2708-bcm2708 \
 	brcm2708-bcm2709 \
 	brcm2708-bcm2710 \
+	ipq40xx \
 	ipq806x \
 	mpc85xx-generic \
 	mvebu-cortexa9 \

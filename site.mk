@@ -282,6 +282,13 @@ ifeq ($(GLUON_TARGET),ar71xx-nand)
 		$(MISC_PACKAGES)
 endif
 
+# ipq40xx
+ifeq ($(GLUON_TARGET),ipq40xx)
+	GLUON_SITE_PACKAGES += \
+		$(USB_PACKAGES_WITHOUT_HID) \
+		$(MISC_PACKAGES)
+endif
+
 # ipq806x
 ifeq ($(GLUON_TARGET),ipq806x)
 	GLUON_SITE_PACKAGES += \
