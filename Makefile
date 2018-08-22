@@ -20,7 +20,7 @@ GLUON_TARGETS ?= \
 	ramips-mt7621 \
 	ramips-mt7628 \
 	ramips-rt305x \
-	sunxi \
+	sunxi-cortexa7 \
 	x86-64 \
 	x86-generic \
 	x86-geode

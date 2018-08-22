@@ -363,8 +363,8 @@ ifeq ($(GLUON_TARGET),brcm2708-bcm2710)
 		$(MISC_PACKAGES)
 endif
 
-# sunxi
-ifeq ($(GLUON_TARGET),sunxi)
+# sunxi-cortexa7
+ifeq ($(GLUON_TARGET),sunxi-cortexa7)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
 		$(MISC_PACKAGES)
