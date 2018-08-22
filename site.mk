@@ -328,8 +328,8 @@ ifeq ($(GLUON_TARGET),ramips-mt7621)
 	GLUON_ubnt-erx-sfp_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 endif
 
-# ramips-mt7628
-ifeq ($(GLUON_TARGET),ramips-mt7628)
+# ramips-mt76x8
+ifeq ($(GLUON_TARGET),ramips-mt76x8)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
 		$(MISC_PACKAGES)

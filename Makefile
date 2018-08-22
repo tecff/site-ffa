@@ -18,7 +18,7 @@ GLUON_TARGETS ?= \
 	mvebu-cortexa9 \
 	ramips-mt7620 \
 	ramips-mt7621 \
-	ramips-mt7628 \
+	ramips-mt76x8 \
 	ramips-rt305x \
 	sunxi-cortexa7 \
 	x86-64 \
