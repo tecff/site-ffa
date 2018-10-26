@@ -1,5 +1,25 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v6
+ - Update to Gluon v2018.1.1 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.org/en/v2018.1.x/releases/v2018.1.html
+   - Changes: https://gluon.readthedocs.org/en/v2018.1.x/releases/v2018.1.1.html
+ - Update site.conf
+   - changes for Gluon v2018.1.x branch
+   - force user to set a custom hostname
+   - add custom nextnode domain names
+   - disable pubkey_privacy
+   - disable VXLAN
+ - Update site.mk
+   - changes for Gluon v2018.1.x branch
+   - use GLUON_FEATURES
+   - add new package radv-filterd
+   - add new package ebtables-limit-arp
+   - add tools on x86 devices
+ - new target brcm2708-2710 (Raspberry Pi 3)
+ - update packages to work with Gluon v2018.1.x
+ - custom config mode descriptions are now set via .po files instead of Gluon patches
+
 ## v5.2
  - Update to Gluon v2017.1.8 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.org/en/v2017.1.8/releases/v2017.1.8.html
