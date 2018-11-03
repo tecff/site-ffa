@@ -2,4 +2,4 @@ GLUON_SITE_FEEDS='tecff'
 
 PACKAGES_TECFF_REPO=https://github.com/tecff/gluon-packages.git
 PACKAGES_TECFF_BRANCH=master
-PACKAGES_TECFF_COMMIT=efd9ca5dad83608bc93b60bccddf654474ecdcd0
+PACKAGES_TECFF_COMMIT=0b6cfae0c6bca1f9893cf1b6cb518e7265dd4c0f
