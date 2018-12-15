@@ -2,8 +2,8 @@
 
 ## v6
  - Update to Gluon v2018.1.1 (see upstream release notes!)
-   - Changes: https://gluon.readthedocs.org/en/v2018.1.x/releases/v2018.1.html
-   - Changes: https://gluon.readthedocs.org/en/v2018.1.x/releases/v2018.1.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2018.1.x/releases/v2018.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2018.1.x/releases/v2018.1.1.html
  - Update site.conf
    - changes for Gluon v2018.1.x branch
    - force user to set a custom hostname
@@ -22,7 +22,7 @@
 
 ## v5.2
  - Update to Gluon v2017.1.8 (see upstream release notes!)
-   - Changes: https://gluon.readthedocs.org/en/v2017.1.8/releases/v2017.1.8.html
+   - Changes: https://gluon.readthedocs.io/en/v2017.1.8/releases/v2017.1.8.html
  - update some packages to improve reliability and facilitate debugging
  - improve Makefile
 
@@ -33,14 +33,14 @@
 
 ## v5
  - Update to Gluon v2017.1.7 (see upstream release notes!)
-   - Changes: https://gluon.readthedocs.org/en/v2017.1/releases/v2017.1.html
-   - Changes: https://gluon.readthedocs.org/en/v2017.1.1/releases/v2017.1.1.html
-   - Changes: https://gluon.readthedocs.org/en/v2017.1.2/releases/v2017.1.2.html
-   - Changes: https://gluon.readthedocs.org/en/v2017.1.3/releases/v2017.1.3.html
-   - Changes: https://gluon.readthedocs.org/en/v2017.1.4/releases/v2017.1.4.html
-   - Changes: https://gluon.readthedocs.org/en/v2017.1.5/releases/v2017.1.5.html
-   - Changes: https://gluon.readthedocs.org/en/v2017.1.6/releases/v2017.1.6.html
-   - Changes: https://gluon.readthedocs.org/en/v2017.1.7/releases/v2017.1.7.html
+   - Changes: https://gluon.readthedocs.io/en/v2017.1/releases/v2017.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2017.1.1/releases/v2017.1.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2017.1.2/releases/v2017.1.2.html
+   - Changes: https://gluon.readthedocs.io/en/v2017.1.3/releases/v2017.1.3.html
+   - Changes: https://gluon.readthedocs.io/en/v2017.1.4/releases/v2017.1.4.html
+   - Changes: https://gluon.readthedocs.io/en/v2017.1.5/releases/v2017.1.5.html
+   - Changes: https://gluon.readthedocs.io/en/v2017.1.6/releases/v2017.1.6.html
+   - Changes: https://gluon.readthedocs.io/en/v2017.1.7/releases/v2017.1.7.html
  - Update site.conf
    - changes for Gluon v2017.1.x branch based on LEDE 17.01
  - Update site.mk
@@ -67,9 +67,9 @@
 
 ## v2016.2.7
  - Updated to Gluon v2016.2.7 (see upstream release notes!)
-   - Changes: https://gluon.readthedocs.org/en/v2016.2.5/releases/v2016.2.5.html
-   - Changes: https://gluon.readthedocs.org/en/v2016.2.6/releases/v2016.2.6.html
-   - Changes: https://gluon.readthedocs.org/en/v2016.2.7/releases/v2016.2.7.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.2.5/releases/v2016.2.5.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.2.6/releases/v2016.2.6.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.2.7/releases/v2016.2.7.html
  - Updated site.conf
    - increase MTU to 1312
 
@@ -79,7 +79,7 @@
 
 ## v2016.2.4
  - Updated to Gluon 2016.2.4 (see upstream release notes!)
-   - Changes: https://gluon.readthedocs.org/en/v2016.2.4/releases/v2016.2.4.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.2.4/releases/v2016.2.4.html
  - Updated site.conf
    - change TLD of openwrt opkg download proxy
    - add static IPv4 & IPv6 addresses for fastd instances
@@ -91,10 +91,10 @@
 
 ## v2016.2.3
  - Updated to Gluon 2016.2.3 (see upstream release notes!)
-   - Changes: https://gluon.readthedocs.org/en/v2016.2/releases/v2016.2.html
-   - Changes: https://gluon.readthedocs.org/en/v2016.2.1/releases/v2016.2.1.html
-   - Changes: https://gluon.readthedocs.org/en/v2016.2.2/releases/v2016.2.2.html
-   - Changes: https://gluon.readthedocs.org/en/v2016.2.3/releases/v2016.2.3.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.2/releases/v2016.2.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.2.1/releases/v2016.2.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.2.2/releases/v2016.2.2.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.2.3/releases/v2016.2.3.html
  - Updated site.conf
     - activate 802.11s meshing standard parallel to ibss/adhoc
     - add supported and basic rates to configuration
@@ -113,7 +113,7 @@
 
 ## v2016.1.6
  - Updated to Gluon 2016.1.6
-   - Changes: https://gluon.readthedocs.org/en/v2016.1.6/releases/v2016.1.6.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.1.6/releases/v2016.1.6.html
  - Updated site.conf
    - add 2 additional placeholder fastd gws
    - add 6th firmware signture key & replace one
@@ -145,8 +145,8 @@
 
 ## v2016.1.5
  - Updated to Gluon 2016.1.5, includes 2016.1.4
-   - Changes: https://gluon.readthedocs.org/en/v2016.1.4/releases/v2016.1.4.html
-   - Changes: https://gluon.readthedocs.org/en/v2016.1.5/releases/v2016.1.5.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.1.4/releases/v2016.1.4.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.1.5/releases/v2016.1.5.html
  - use the additional packages for D-Link DIR-505
  - add workaround package/script for problems with ath9k wifi driver
  - add package for special treatment of nodes
@@ -158,24 +158,24 @@
 
 ## v2016.1.3
  - Updated to Gluon 2016.1.3
-   - Changes: https://gluon.readthedocs.org/en/v2016.1.3/releases/v2016.1.3.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.1.3/releases/v2016.1.3.html
  - support for rtl8152 network chip used in USB networking devices
 
 ## v2016.1.2
  - Updated to Gluon 2016.1.2
-   - Changes: https://gluon.readthedocs.org/en/v2016.1.2/releases/v2016.1.2.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.1.2/releases/v2016.1.2.html
  - support for TP-Link TL-WA7510N
  - support for Raspberry Pi A/B/B+/2
  - support for several additional USB networking devices
 
 ## v2016.1.1
  - Updated to Gluon 2016.1.1
-   - Changes: https://gluon.readthedocs.org/en/v2016.1.1/releases/v2016.1.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.1.1/releases/v2016.1.1.html
  - add preserve wifi channels feature
 
 ## v2016.1
  - Updated to Gluon 2016.1
-   - Changes: https://gluon.readthedocs.org/en/v2016.1/releases/v2016.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2016.1/releases/v2016.1.html
  - Update site.conf
    - change default ESSID to Freifunk
    - raise number of necessary signatures for sysupgrade images
