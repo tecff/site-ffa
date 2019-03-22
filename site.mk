@@ -21,6 +21,7 @@ GLUON_FEATURES := \
 
 # base packages
 GLUON_SITE_PACKAGES := \
+	ffffm-button-bind \
 	haveged \
 	iwinfo \
 	tecff-ath9k-broken-wifi-workaround \
