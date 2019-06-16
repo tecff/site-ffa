@@ -21,13 +21,13 @@ GLUON_FEATURES := \
 
 # base packages
 GLUON_SITE_PACKAGES := \
-	ffffm-button-bind \
 	haveged \
 	iwinfo \
 	tecff-ath9k-broken-wifi-workaround \
 	tecff-autoupdater-to-stable \
 	tecff-autoupdater-wifi-fallback \
 	tecff-banner \
+	tecff-button-bind \
 	tecff-general-workaround \
 	tecff-ssid-changer
 
