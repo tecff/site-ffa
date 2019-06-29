@@ -413,3 +413,6 @@ GLUON_REGION ?= eu
 
 # Languages to include
 GLUON_LANGS ?= en de
+
+# Only build sysupgrade images for deprecated devices.
+GLUON_DEPRECATED ?= upgrade
