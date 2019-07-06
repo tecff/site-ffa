@@ -1,5 +1,25 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v7
+ - Update to Gluon v2018.2.2 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.html
+   - Changes: https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.2.html
+ - Update site.conf
+   - changes for Gluon v2018.2.x branch
+   - revert "force user to set a custom hostname" as it's the default
+   - add privatereese's signing key
+   - remove waha's signing key
+ - Update site.mk
+   - changes for Gluon v2018.2.x branch
+   - add new feature config-mode-geo-location-osm
+   - add package tecff-button-bind
+   - remove ebtables-limit-arp (active by default now)
+ - updated text to include community guidelines
+ - new target ipq40xx (ARM)
+ - update packages to work with Gluon v2018.2.x
+ - make packages/scripts more robust, e.g. using flock for locking
+
 ## v6.1
  - Update to Gluon v2018.1.4 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.io/en/v2018.1.x/releases/v2018.1.2.html
