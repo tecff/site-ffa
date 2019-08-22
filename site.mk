@@ -209,13 +209,23 @@ PCI_PACKAGES := \
 	kmod-usb-ohci-pci \
 	$(PCI_PACKAGES_NET)
 
+TLS_PACKAGES := \
+	ca-bundle \
+	libustream-mbedtls \
+	wget
+
+NO_TLS_PACKAGES := \
+	-ca-bundle \
+	-libustream-mbedtls \
+	-wget
+
 # x86 specific packages (more space available)
 X86_PACKAGES := \
 	$(USB_PACKAGES) \
 	$(MISC_PACKAGES) \
 	$(PCI_PACKAGES) \
-	bash \
-	wget-nossl
+	$(TLS_PACKAGES) \
+	bash
 
 #
 # $(GLUON_TARGET) specific settings:
@@ -275,6 +285,7 @@ endif
 ifeq ($(GLUON_TARGET),ar71xx-mikrotik)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 endif
 
@@ -289,6 +300,7 @@ endif
 ifeq ($(GLUON_TARGET),ipq40xx)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 endif
 
@@ -296,6 +308,7 @@ endif
 ifeq ($(GLUON_TARGET),ipq806x)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 endif
 
@@ -303,6 +316,7 @@ endif
 ifeq ($(GLUON_TARGET),mpc85xx-generic)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 endif
 
@@ -310,6 +324,7 @@ endif
 ifeq ($(GLUON_TARGET),mvebu-cortexa9)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 endif
 
@@ -317,6 +332,7 @@ endif
 ifeq ($(GLUON_TARGET),ramips-mt7620)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 endif
 
@@ -324,11 +340,12 @@ endif
 ifeq ($(GLUON_TARGET),ramips-mt7621)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 
 	# no USB port
-	GLUON_ubnt-erx_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
-	GLUON_ubnt-erx-sfp_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
+	GLUON_ubnt-erx_SITE_PACKAGES += $(NO_TLS_PACKAGES) $(NO_USB_PACKAGES_WITHOUT_HID)
+	GLUON_ubnt-erx-sfp_SITE_PACKAGES += $(NO_TLS_PACKAGES) $(NO_USB_PACKAGES_WITHOUT_HID)
 endif
 
 # ramips-mt76x8
@@ -349,6 +366,7 @@ endif
 ifeq ($(GLUON_TARGET),brcm2708-bcm2708)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 endif
 
@@ -356,6 +374,7 @@ endif
 ifeq ($(GLUON_TARGET),brcm2708-bcm2709)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 endif
 
@@ -363,6 +382,7 @@ endif
 ifeq ($(GLUON_TARGET),brcm2708-bcm2710)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 endif
 
@@ -370,6 +390,7 @@ endif
 ifeq ($(GLUON_TARGET),sunxi-cortexa7)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
+		$(TLS_PACKAGES) \
 		$(MISC_PACKAGES)
 endif
 
