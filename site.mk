@@ -211,6 +211,8 @@ PCI_PACKAGES := \
 
 # x86 specific packages (more space available)
 X86_PACKAGES := \
+	$(USB_PACKAGES) \
+	$(MISC_PACKAGES) \
 	$(PCI_PACKAGES) \
 	bash \
 	wget-nossl
@@ -374,24 +376,18 @@ endif
 # x86-64
 ifeq ($(GLUON_TARGET),x86-64)
 	GLUON_SITE_PACKAGES += \
-		$(USB_PACKAGES) \
-		$(MISC_PACKAGES) \
 		$(X86_PACKAGES)
 endif
 
 # x86-generic
 ifeq ($(GLUON_TARGET),x86-generic)
 	GLUON_SITE_PACKAGES += \
-		$(USB_PACKAGES) \
-		$(MISC_PACKAGES) \
 		$(X86_PACKAGES)
 endif
 
 # x86-geode
 ifeq ($(GLUON_TARGET),x86-geode)
 	GLUON_SITE_PACKAGES += \
-		$(USB_PACKAGES) \
-		$(MISC_PACKAGES) \
 		$(X86_PACKAGES)
 endif
 
