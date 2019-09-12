@@ -1,5 +1,9 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v7.1
+ - Update to Gluon v2018.2.3 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.3.html
+
 ## v7
  - Update to Gluon v2018.2.2 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.html
