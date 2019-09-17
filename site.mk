@@ -355,13 +355,6 @@ ifeq ($(GLUON_TARGET),ramips-mt76x8)
 		$(MISC_PACKAGES)
 endif
 
-# ramips-rt305x
-ifeq ($(GLUON_TARGET),ramips-rt305x)
-	GLUON_SITE_PACKAGES += \
-		$(USB_PACKAGES_WITHOUT_HID) \
-		$(MISC_PACKAGES)
-endif
-
 # Raspberry Pi A/B/B+
 ifeq ($(GLUON_TARGET),brcm2708-bcm2708)
 	GLUON_SITE_PACKAGES += \
