@@ -320,6 +320,14 @@ ifeq ($(GLUON_TARGET),mpc85xx-generic)
 		$(MISC_PACKAGES)
 endif
 
+# mpc85xx-p1020
+ifeq ($(GLUON_TARGET),mpc85xx-p1020)
+	GLUON_SITE_PACKAGES += \
+		$(USB_PACKAGES_WITHOUT_HID) \
+		$(TLS_PACKAGES) \
+		$(MISC_PACKAGES)
+endif
+
 # mvebu-cortexa9
 ifeq ($(GLUON_TARGET),mvebu-cortexa9)
 	GLUON_SITE_PACKAGES += \
