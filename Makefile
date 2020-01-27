@@ -9,6 +9,7 @@ GLUON_TARGETS ?= \
 	ar71xx-mikrotik \
 	ar71xx-nand \
 	ar71xx-tiny \
+	ath79-generic \
 	brcm2708-bcm2708 \
 	brcm2708-bcm2709 \
 	brcm2708-bcm2710 \
