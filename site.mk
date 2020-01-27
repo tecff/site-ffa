@@ -319,6 +319,13 @@ ifeq ($(GLUON_TARGET),ipq806x)
 		$(MISC_PACKAGES)
 endif
 
+# lantiq-xrx200
+ifeq ($(GLUON_TARGET),lantiq-xrx200)
+	GLUON_SITE_PACKAGES += \
+		$(USB_PACKAGES_WITHOUT_HID) \
+		$(MISC_PACKAGES)
+endif
+
 # mpc85xx-generic
 ifeq ($(GLUON_TARGET),mpc85xx-generic)
 	GLUON_SITE_PACKAGES += \
