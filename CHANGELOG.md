@@ -1,5 +1,18 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v8
+ - Update to Gluon v2019.1.2 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.io/en/v2019.1.x/releases/v2019.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2019.1.x/releases/v2019.1.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2019.1.x/releases/v2019.1.2.html
+ - Update site.conf
+   - changes for Gluon v2019.1.x branch
+ - Update site.mk
+   - changes for Gluon v2019.1.x branch
+   - build only sysupgrade images for deprecated devices
+   - add TLS packages to devices with enough flash space
+ - new target mpc85xx-p1020
+
 ## v7.1
  - Update to Gluon v2018.2.3 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.io/en/v2018.2.x/releases/v2018.2.3.html
