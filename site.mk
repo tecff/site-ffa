@@ -303,8 +303,8 @@ ifeq ($(GLUON_TARGET),ath79-generic)
 		$(MISC_PACKAGES)
 endif
 
-# ipq40xx
-ifeq ($(GLUON_TARGET),ipq40xx)
+# ipq40xx-generic
+ifeq ($(GLUON_TARGET),ipq40xx-generic)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
 		$(TLS_PACKAGES) \

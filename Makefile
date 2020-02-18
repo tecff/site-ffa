@@ -13,7 +13,7 @@ GLUON_TARGETS ?= \
 	brcm2708-bcm2708 \
 	brcm2708-bcm2709 \
 	brcm2708-bcm2710 \
-	ipq40xx \
+	ipq40xx-generic \
 	ipq806x \
 	lantiq-xrx200 \
 	mpc85xx-generic \
