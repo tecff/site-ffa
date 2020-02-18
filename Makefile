@@ -16,6 +16,7 @@ GLUON_TARGETS ?= \
 	ipq40xx-generic \
 	ipq806x-generic \
 	lantiq-xrx200 \
+	lantiq-xway \
 	mpc85xx-generic \
 	mpc85xx-p1020 \
 	mvebu-cortexa9 \
