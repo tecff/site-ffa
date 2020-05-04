@@ -23,7 +23,6 @@ GLUON_FEATURES := \
 GLUON_SITE_PACKAGES := \
 	haveged \
 	iwinfo \
-	tecff-ath9k-broken-wifi-workaround \
 	tecff-autoupdater-to-stable \
 	tecff-autoupdater-wifi-fallback \
 	tecff-banner \
