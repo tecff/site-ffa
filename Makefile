@@ -39,8 +39,8 @@ endif
 MAKE_PID := $(shell echo $$PPID)
 JOB_FLAG := $(filter -j%, $(subst -j ,-j,$(shell ps T | grep "^\s*$(MAKE_PID).*$(MAKE)")))
 JOBS     := $(subst -j,,${JOB_FLAG})
-ifeq ($(strip ${JOBS}),)
-    JOBS := $(shell cat /proc/cpuinfo | grep processor | wc -l)
+ifeq (,$(strip ${JOBS}))
+  JOBS := $(shell cat /proc/cpuinfo | grep processor | wc -l)
 endif
 
 GLUON_MAKEFLAGS := -j${JOBS} -C ${GLUON_BUILD_DIR} \
