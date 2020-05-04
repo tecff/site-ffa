@@ -4,30 +4,35 @@ GLUON_GIT_REF := v2020.1.2-tecff-1
 
 SECRET_KEY_FILE ?= ${HOME}/.gluon-secret-key
 
-GLUON_TARGETS ?= \
+ifeq (,$(GLUON_TARGETS))
+  GLUON_TARGETS := \
 	ar71xx-generic \
-	ar71xx-mikrotik \
 	ar71xx-nand \
 	ar71xx-tiny \
 	ath79-generic \
 	brcm2708-bcm2708 \
 	brcm2708-bcm2709 \
-	brcm2708-bcm2710 \
 	ipq40xx-generic \
 	ipq806x-generic \
 	lantiq-xrx200 \
 	lantiq-xway \
 	mpc85xx-generic \
 	mpc85xx-p1020 \
-	mvebu-cortexa9 \
 	ramips-mt7620 \
 	ramips-mt7621 \
 	ramips-mt76x8 \
+	x86-64
+ifneq (,$(BROKEN))
+  GLUON_TARGETS += \
+	ar71xx-mikrotik \
+	brcm2708-bcm2710 \
+	mvebu-cortexa9 \
 	ramips-rt305x \
 	sunxi-cortexa7 \
-	x86-64 \
 	x86-generic \
 	x86-geode
+endif
+endif
 
 GLUON_RELEASE := $(shell git describe --tags 2>/dev/null)
 ifneq (,$(shell git describe --exact-match --tags 2>/dev/null))
