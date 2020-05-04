@@ -237,9 +237,6 @@ ifeq ($(GLUON_TARGET),ar71xx-generic)
 		$(USB_PACKAGES_WITHOUT_HID) \
 		$(MISC_PACKAGES)
 
-	# TP-Link Archer C25 v1
-	GLUON_tp-link-archer-c25-v1_SITE_PACKAGES += tecff-archer-c25
-
 	# lowmem or no usb port
 	GLUON_alfa-network-hornet-ub_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_alfa-network-tube2h_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
