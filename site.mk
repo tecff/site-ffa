@@ -21,7 +21,6 @@ GLUON_FEATURES := \
 
 # base packages
 GLUON_SITE_PACKAGES := \
-	haveged \
 	iwinfo \
 	tecff-autoupdater-to-stable \
 	tecff-autoupdater-wifi-fallback \
