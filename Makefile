@@ -30,7 +30,8 @@ ifneq (,$(BROKEN))
 	ramips-rt305x \
 	sunxi-cortexa7 \
 	x86-generic \
-	x86-geode
+	x86-geode \
+	x86-legacy
 endif
 endif
 

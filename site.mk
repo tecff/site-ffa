@@ -430,6 +430,12 @@ ifeq ($(GLUON_TARGET),x86-geode)
 		$(X86_PACKAGES)
 endif
 
+# x86-legacy
+ifeq ($(GLUON_TARGET),x86-legacy)
+	GLUON_SITE_PACKAGES += \
+		$(X86_PACKAGES)
+endif
+
 
 #
 # General settings
