@@ -1,5 +1,28 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v9
+ - Update to Gluon v2020.1.3 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.io/en/v2020.1.x/releases/v2020.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2020.1.x/releases/v2020.1.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2020.1.x/releases/v2020.1.2.html
+   - Changes: https://gluon.readthedocs.io/en/v2020.1.x/releases/v2020.1.3.html
+   - additional bugfixes committed after v2020.1.3
+ - Update site.conf
+   - changes for Gluon v2019.1.x branch
+ - Update site.mk
+   - remove driver-specific ath9k-broken-wifi-workaround
+   - remove special handling of Archer C25
+ - new targets
+   - ath79-generic
+   - lantiq-xrx200
+   - lantiq-xway
+ - bugfix in ssid-changer
+ - some targets will not be built by default anymore
+   - ramips-rt305x
+   - sunxi-cortexa7
+   - x86-generic
+   - x86-geode
+
 ## v8
  - Update to Gluon v2019.1.2 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.io/en/v2019.1.x/releases/v2019.1.html
