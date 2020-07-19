@@ -33,16 +33,11 @@ GLUON_SITE_PACKAGES := \
 	tecff-general-workaround \
 	tecff-ssid-changer
 
-# misc packages, only on devices with 8MB flash and 64MB memory (or more)
-MISC_PACKAGES := \
+# packages for non-tiny standard devices - devices with >=7M flash and >=64M memory
+GLUON_SITE_PACKAGES_standard := \
 	respondd-module-airtime \
 	tecff-aptimeclock \
 	tecff-vpnlimittimeclock
-
-NO_MISC_PACKAGES := \
-	-respondd-module-airtime \
-	-tecff-aptimeclock \
-	-tecff-vpnlimittimeclock
 
 # basic support for USB stack
 USB_PACKAGES_BASIC := \
@@ -224,7 +219,6 @@ NO_TLS_PACKAGES := \
 # x86 specific packages (more space available)
 X86_PACKAGES := \
 	$(USB_PACKAGES) \
-	$(MISC_PACKAGES) \
 	$(PCI_PACKAGES) \
 	$(TLS_PACKAGES) \
 	bash
@@ -236,16 +230,15 @@ X86_PACKAGES := \
 # ar71xx-generic
 ifeq ($(GLUON_TARGET),ar71xx-generic)
 	GLUON_SITE_PACKAGES += \
-		$(USB_PACKAGES_WITHOUT_HID) \
-		$(MISC_PACKAGES)
+		$(USB_PACKAGES_WITHOUT_HID)
 
 	# lowmem or no usb port
 	GLUON_alfa-network-hornet-ub_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_alfa-network-tube2h_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_d-link-dir-615-h1_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
-	GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) $(NO_MISC_PACKAGES) -opkg
-	GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) $(NO_MISC_PACKAGES) -opkg
-	GLUON_tp-link-tl-wr1043n-nd-v1_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) $(NO_MISC_PACKAGES) -opkg
+	GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) -opkg
+	GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) -opkg
+	GLUON_tp-link-tl-wr1043n-nd-v1_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) -opkg
 	GLUON_tp-link-wbs210-v1.20_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_tp-link-wbs510-v1.20_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_tp-link-cpe210-v1.0_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
@@ -264,11 +257,11 @@ ifeq ($(GLUON_TARGET),ar71xx-generic)
 	GLUON_ubiquiti-airgateway_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_ubiquiti-airgateway-pro_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_ubiquiti-airrouter_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
-	GLUON_ubiquiti-bullet-m_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) $(NO_MISC_PACKAGES) -opkg
-	GLUON_ubiquiti-loco-m-xw_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) $(NO_MISC_PACKAGES) -opkg
+	GLUON_ubiquiti-bullet-m_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) -opkg
+	GLUON_ubiquiti-loco-m-xw_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) -opkg
 	GLUON_ubiquiti-ls-sr71_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
-	GLUON_ubiquiti-nanostation-m_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) $(NO_MISC_PACKAGES) -opkg
-	GLUON_ubiquiti-nanostation-m-xw_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) $(NO_MISC_PACKAGES) -opkg
+	GLUON_ubiquiti-nanostation-m_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) -opkg
+	GLUON_ubiquiti-nanostation-m-xw_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) -opkg
 	GLUON_ubiquiti-rocket-m_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_ubiquiti-rocket-m-ti_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_ubiquiti-rocket-m-xw_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
@@ -284,92 +277,80 @@ endif
 ifeq ($(GLUON_TARGET),ar71xx-mikrotik)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # ar71xx-nand
 ifeq ($(GLUON_TARGET),ar71xx-nand)
 	GLUON_SITE_PACKAGES += \
-		$(USB_PACKAGES_WITHOUT_HID) \
-		$(MISC_PACKAGES)
+		$(USB_PACKAGES_WITHOUT_HID)
 endif
 
 # ath79-generic
 ifeq ($(GLUON_TARGET),ath79-generic)
 	GLUON_SITE_PACKAGES += \
-		$(USB_PACKAGES_WITHOUT_HID) \
-		$(MISC_PACKAGES)
+		$(USB_PACKAGES_WITHOUT_HID)
 endif
 
 # ipq40xx-generic
 ifeq ($(GLUON_TARGET),ipq40xx-generic)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # ipq806x-generic
 ifeq ($(GLUON_TARGET),ipq806x-generic)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # lantiq-xrx200
 ifeq ($(GLUON_TARGET),lantiq-xrx200)
 	GLUON_SITE_PACKAGES += \
-		$(USB_PACKAGES_WITHOUT_HID) \
-		$(MISC_PACKAGES)
+		$(USB_PACKAGES_WITHOUT_HID)
 endif
 
 # lantiq-xway
 ifeq ($(GLUON_TARGET),lantiq-xway)
 	GLUON_SITE_PACKAGES += \
-		$(USB_PACKAGES_WITHOUT_HID) \
-		$(MISC_PACKAGES)
+		$(USB_PACKAGES_WITHOUT_HID)
 endif
 
 # mpc85xx-generic
 ifeq ($(GLUON_TARGET),mpc85xx-generic)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # mpc85xx-p1020
 ifeq ($(GLUON_TARGET),mpc85xx-p1020)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # mvebu-cortexa9
 ifeq ($(GLUON_TARGET),mvebu-cortexa9)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # ramips-mt7620
 ifeq ($(GLUON_TARGET),ramips-mt7620)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # ramips-mt7621
 ifeq ($(GLUON_TARGET),ramips-mt7621)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 
 	# no USB port
 	GLUON_ubnt-erx_SITE_PACKAGES += $(NO_TLS_PACKAGES) $(NO_USB_PACKAGES_WITHOUT_HID)
@@ -379,40 +360,35 @@ endif
 # ramips-mt76x8
 ifeq ($(GLUON_TARGET),ramips-mt76x8)
 	GLUON_SITE_PACKAGES += \
-		$(USB_PACKAGES_WITHOUT_HID) \
-		$(MISC_PACKAGES)
+		$(USB_PACKAGES_WITHOUT_HID)
 endif
 
 # Raspberry Pi A/B/B+
 ifeq ($(GLUON_TARGET),brcm2708-bcm2708)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # Raspberry Pi 2
 ifeq ($(GLUON_TARGET),brcm2708-bcm2709)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # Raspberry Pi 3
 ifeq ($(GLUON_TARGET),brcm2708-bcm2710)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # sunxi-cortexa7
 ifeq ($(GLUON_TARGET),sunxi-cortexa7)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
-		$(TLS_PACKAGES) \
-		$(MISC_PACKAGES)
+		$(TLS_PACKAGES)
 endif
 
 # x86-64
