@@ -19,6 +19,10 @@ GLUON_FEATURES := \
 	web-private-wifi \
 	web-wizard
 
+# features for non-tiny standard devices - devices with >=7M flash and >=64M memory
+GLUON_FEATURES_standard := \
+	wireless-encryption-wpa3
+
 # base packages
 GLUON_SITE_PACKAGES := \
 	iwinfo \
