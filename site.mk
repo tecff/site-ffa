@@ -29,6 +29,7 @@ GLUON_SITE_PACKAGES := \
 	tecff-autoupdater-to-stable \
 	tecff-autoupdater-wifi-fallback \
 	tecff-banner \
+	tecff-broken-wlan-workaround \
 	tecff-button-bind \
 	tecff-general-workaround \
 	tecff-ssid-changer
