@@ -8,7 +8,7 @@
    - Changes: https://gluon.readthedocs.io/en/v2020.1.x/releases/v2020.1.3.html
    - additional bugfixes committed after v2020.1.3
  - Update site.conf
-   - changes for Gluon v2019.1.x branch
+   - change autoupdater path due to major release
  - Update site.mk
    - remove driver-specific ath9k-broken-wifi-workaround
    - remove special handling of Archer C25
@@ -29,6 +29,7 @@
    - Changes: https://gluon.readthedocs.io/en/v2019.1.x/releases/v2019.1.1.html
    - Changes: https://gluon.readthedocs.io/en/v2019.1.x/releases/v2019.1.2.html
  - Update site.conf
+   - change autoupdater path due to major release
    - changes for Gluon v2019.1.x branch
  - Update site.mk
    - changes for Gluon v2019.1.x branch
