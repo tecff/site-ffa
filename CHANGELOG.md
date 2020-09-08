@@ -1,5 +1,19 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v10
+ - Update to Gluon v2020.2.1 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.io/en/v2020.2.x/releases/v2020.2.html
+   - Changes: https://gluon.readthedocs.io/en/v2020.2.x/releases/v2020.2.1.html
+ - Update site.conf
+   - change autoupdater path due to major release
+   - add SSID Freifunk_OWE for WPA3 Enhanced Open (only for devices with enough flash memory)
+ - Update site.mk
+   - restructuring
+   - add wireless-encryption-wpa3 for Private WLAN security with WPA3 (only for devices with enough flash memory)
+   - add broken-wlan-workaround
+ - new target
+   - x86-legacy (not built by default)
+
 ## v9
  - Update to Gluon v2020.1.3 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.io/en/v2020.1.x/releases/v2020.1.html
