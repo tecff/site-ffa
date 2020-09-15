@@ -236,7 +236,6 @@ ifeq ($(GLUON_TARGET),ar71xx-generic)
 	# lowmem or no usb port
 	GLUON_alfa-network-hornet-ub_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_alfa-network-tube2h_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
-	GLUON_d-link-dir-615-h1_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_tp-link-tl-wr842n-nd-v1_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) -opkg
 	GLUON_tp-link-tl-wr842n-nd-v2_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) -opkg
 	GLUON_tp-link-tl-wr1043n-nd-v1_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID) -opkg
