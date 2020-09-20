@@ -1,5 +1,16 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v10.1
+ - Update site.mk
+   - multiple cleanups
+   - remove USB packages from additional devices
+ - Multiple bugfixes and improvements in various packages:
+   - aptimeclock
+   - autoupdater-wifi-fallback
+   - broken-wlan-workaround
+   - general-workaround
+   - ssid-changer
+
 ## v10
  - Update to Gluon v2020.2.1 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.io/en/v2020.2.x/releases/v2020.2.html
