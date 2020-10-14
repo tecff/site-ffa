@@ -5,6 +5,7 @@
 # features
 GLUON_FEATURES := \
 	autoupdater \
+	config-mode-domain-select \
 	config-mode-geo-location-osm \
 	ebtables-filter-multicast \
 	ebtables-filter-ra-dhcp \
@@ -448,3 +449,6 @@ GLUON_LANGS ?= en de
 
 # Only build sysupgrade images for deprecated devices.
 GLUON_DEPRECATED ?= upgrade
+
+# Enable multidomain support
+GLUON_MULTIDOMAIN := 1
