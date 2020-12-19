@@ -1,5 +1,12 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v10.2
+ - Update to Gluon v2020.2.2 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.io/en/v2020.2.x/releases/v2020.2.2.html
+ - Update site.conf
+   - explicitly define outdoor wifi channels
+ - Bugfixes for aptimeclock package
+
 ## v10.1
  - Update site.mk
    - multiple cleanups
