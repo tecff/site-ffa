@@ -1,5 +1,10 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v11
+ - Update to Gluon v2021.1.1 (see upstream release notes!)
+   - Changes: https://gluon.readthedocs.io/en/v2021.1.x/releases/v2021.1.html
+   - Changes: https://gluon.readthedocs.io/en/v2021.1.x/releases/v2021.1.1.html
+
 ## v10.2
  - Update to Gluon v2020.2.2 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.io/en/v2020.2.x/releases/v2020.2.2.html
