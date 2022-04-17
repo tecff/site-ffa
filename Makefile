@@ -35,10 +35,12 @@ ifneq (,$(BROKEN))
 endif
 endif
 
+GLUON_AUTOUPDATER_ENABLED := 1
 GLUON_RELEASE := $(shell git describe --tags 2>/dev/null)
 ifneq (,$(shell git describe --exact-match --tags 2>/dev/null))
-  GLUON_BRANCH := stable
-else ifeq (,${GLUON_BRANCH})
+  GLUON_AUTOUPDATER_BRANCH := stable
+else ifeq (,${GLUON_AUTOUPDATER_BRANCH})
+  GLUON_AUTOUPDATER_ENABLED := 0
   GLUON_RELEASE := snapshot~$(shell date '+%Y%m%d')
 endif
 
@@ -51,7 +53,8 @@ endif
 
 GLUON_MAKEFLAGS := -j${JOBS} -C ${GLUON_BUILD_DIR} \
 			GLUON_RELEASE=${GLUON_RELEASE} \
-			GLUON_BRANCH=${GLUON_BRANCH}
+			GLUON_AUTOUPDATER_ENABLED=${GLUON_AUTOUPDATER_ENABLED} \
+			GLUON_AUTOUPDATER_BRANCH=${GLUON_AUTOUPDATER_BRANCH}
 
 # this special target makes sure that this Makefile is run serially
 .NOTPARALLEL:
@@ -63,7 +66,7 @@ info:
 	@echo '#########################'
 	@echo '# TECFF Firmware build'
 	@echo '# GLUON_RELEASE: ${GLUON_RELEASE}'
-	@echo '# GLUON_BRANCH:  ${GLUON_BRANCH}'
+	@echo '# GLUON_AUTOUPDATER_BRANCH:  ${GLUON_AUTOUPDATER_BRANCH}'
 	@echo '# GLUON_GIT_URL: ${GLUON_GIT_URL}'
 	@echo '# GLUON_GIT_REF: ${GLUON_GIT_REF}'
 	@echo '#########################'
@@ -86,7 +89,7 @@ move-output:
 
 sign: build manifest move-output
 	@echo '# signing manifest...'
-	${GLUON_BUILD_DIR}/contrib/sign.sh ${SECRET_KEY_FILE} output/images/sysupgrade/${GLUON_BRANCH}.manifest
+	${GLUON_BUILD_DIR}/contrib/sign.sh ${SECRET_KEY_FILE} output/images/sysupgrade/${GLUON_AUTOUPDATER_BRANCH}.manifest
 
 ${GLUON_BUILD_DIR}:
 	git clone ${GLUON_GIT_URL} ${GLUON_BUILD_DIR}
