@@ -357,6 +357,16 @@ ifeq ($(GLUON_TARGET),mvebu-cortexa9)
 		$(TLS_PACKAGES)
 endif
 
+# mediatek-mt7622
+ifeq ($(GLUON_TARGET),mediatek-mt7622)
+	GLUON_SITE_PACKAGES += \
+		$(USB_PACKAGES_WITHOUT_HID) \
+		$(TLS_PACKAGES)
+
+	# no USB port
+	GLUON_ubiquiti-unifi-6-lr_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
+endif
+
 # ramips-mt7620
 ifeq ($(GLUON_TARGET),ramips-mt7620)
 	GLUON_SITE_PACKAGES += \
