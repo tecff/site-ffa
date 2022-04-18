@@ -7,6 +7,7 @@ SECRET_KEY_FILE ?= ${HOME}/.gluon-secret-key
 ifeq (,$(GLUON_TARGETS))
   GLUON_TARGETS := \
 	ath79-generic \
+	ath79-nand \
 	brcm2708-bcm2708 \
 	brcm2708-bcm2709 \
 	ipq40xx-generic \

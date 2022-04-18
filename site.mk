@@ -310,6 +310,12 @@ ifeq ($(GLUON_TARGET),ath79-generic)
 	GLUON_ubiquiti-unifi-ap-pro_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 endif
 
+# ath79-nand
+ifeq ($(GLUON_TARGET),ath79-nand)
+	GLUON_SITE_PACKAGES += \
+		$(USB_PACKAGES_WITHOUT_HID)
+endif
+
 # ipq40xx-generic
 ifeq ($(GLUON_TARGET),ipq40xx-generic)
 	GLUON_SITE_PACKAGES += \
