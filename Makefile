@@ -6,9 +6,6 @@ SECRET_KEY_FILE ?= ${HOME}/.gluon-secret-key
 
 ifeq (,$(GLUON_TARGETS))
   GLUON_TARGETS := \
-	ar71xx-generic \
-	ar71xx-nand \
-	ar71xx-tiny \
 	ath79-generic \
 	brcm2708-bcm2708 \
 	brcm2708-bcm2709 \
@@ -24,7 +21,6 @@ ifeq (,$(GLUON_TARGETS))
 	x86-64
 ifneq (,$(BROKEN))
   GLUON_TARGETS += \
-	ar71xx-mikrotik \
 	brcm2708-bcm2710 \
 	mvebu-cortexa9 \
 	ramips-rt305x \
