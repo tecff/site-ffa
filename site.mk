@@ -217,12 +217,12 @@ PCI_PACKAGES := \
 TLS_PACKAGES := \
 	ca-bundle \
 	libustream-mbedtls \
-	wget
+	wget-ssl
 
 NO_TLS_PACKAGES := \
 	-ca-bundle \
 	-libustream-mbedtls \
-	-wget
+	-wget-ssl
 
 # x86 specific packages (more space available)
 X86_PACKAGES := \
