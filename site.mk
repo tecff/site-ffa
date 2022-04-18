@@ -365,8 +365,8 @@ ifeq ($(GLUON_TARGET),ramips-mt7621)
 		$(TLS_PACKAGES)
 
 	# no USB port
-	GLUON_ubnt-erx_SITE_PACKAGES += $(NO_TLS_PACKAGES) $(NO_USB_PACKAGES_WITHOUT_HID)
-	GLUON_ubnt-erx-sfp_SITE_PACKAGES += $(NO_TLS_PACKAGES) $(NO_USB_PACKAGES_WITHOUT_HID)
+	GLUON_ubiquiti-edgerouter-x_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
+	GLUON_ubiquiti-edgerouter-x-sfp_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 endif
 
 # ramips-mt76x8
