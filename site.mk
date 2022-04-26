@@ -42,6 +42,10 @@ GLUON_SITE_PACKAGES_standard := \
 	tecff-aptimeclock \
 	tecff-vpnlimittimeclock
 
+# packages for tiny devices - e.g. devices with <64M memory
+GLUON_SITE_PACKAGES_tiny := \
+	-opkg
+
 # basic support for USB stack
 USB_PACKAGES_BASIC := \
 	kmod-usb-core \
