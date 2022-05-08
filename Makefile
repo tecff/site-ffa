@@ -101,6 +101,14 @@ gluon-prepare: output-clean ${GLUON_BUILD_DIR}
 	ln -sfT .. ${GLUON_BUILD_DIR}/site
 	$(MAKE) ${GLUON_MAKEFLAGS} update
 
+clean:
+	@echo '# starting clean...'
+	+for target in ${GLUON_TARGETS}; do \
+		echo ""Cleaning target $$target""; \
+		$(MAKE) -C ${GLUON_BUILD_DIR} clean GLUON_TARGET="$$target"; \
+	done
+
+
 gluon-clean:
 	@echo '# removing build directory...'
 	rm -rf ${GLUON_BUILD_DIR}
@@ -109,4 +117,4 @@ output-clean:
 	@echo '# removing output of last build...'
 	rm -rf output
 
-clean: gluon-clean output-clean
+dirclean: gluon-clean output-clean
