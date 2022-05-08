@@ -24,6 +24,11 @@ GLUON_FEATURES := \
 GLUON_FEATURES_standard := \
 	wireless-encryption-wpa3
 
+# features for tiny devices - e.g. devices with <64M memory
+GLUON_FEATURES_tiny := \
+	-config-mode-geo-location-osm \
+	-web-private-wifi
+
 # base packages
 GLUON_SITE_PACKAGES := \
 	iwinfo \
