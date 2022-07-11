@@ -324,6 +324,13 @@ ifeq ($(GLUON_TARGET),ipq40xx-generic)
 		$(TLS_PACKAGES)
 endif
 
+# ipq40xx-mikrotik
+ifeq ($(GLUON_TARGET),ipq40xx-mikrotik)
+	GLUON_SITE_PACKAGES += \
+		$(USB_PACKAGES_WITHOUT_HID) \
+		$(TLS_PACKAGES)
+endif
+
 # ipq806x-generic
 ifeq ($(GLUON_TARGET),ipq806x-generic)
 	GLUON_SITE_PACKAGES += \

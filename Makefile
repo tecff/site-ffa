@@ -11,6 +11,7 @@ ifeq (,$(GLUON_TARGETS))
 	brcm2708-bcm2708 \
 	brcm2708-bcm2709 \
 	ipq40xx-generic \
+	ipq40xx-mikrotik \
 	ipq806x-generic \
 	lantiq-xrx200 \
 	lantiq-xway \
