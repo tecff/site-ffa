@@ -449,21 +449,21 @@ ifeq ($(GLUON_TARGET),ramips-mt76x8)
 endif
 
 # Raspberry Pi A/B/B+
-ifeq ($(GLUON_TARGET),brcm2708-bcm2708)
+ifeq ($(GLUON_TARGET),bcm27xx-bcm2708)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
 		$(TLS_PACKAGES)
 endif
 
 # Raspberry Pi 2
-ifeq ($(GLUON_TARGET),brcm2708-bcm2709)
+ifeq ($(GLUON_TARGET),bcm27xx-bcm2709)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
 		$(TLS_PACKAGES)
 endif
 
 # Raspberry Pi 3
-ifeq ($(GLUON_TARGET),brcm2708-bcm2710)
+ifeq ($(GLUON_TARGET),bcm27xx-bcm2710)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES) \
 		$(TLS_PACKAGES)

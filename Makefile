@@ -8,8 +8,8 @@ ifeq (,$(GLUON_TARGETS))
   GLUON_TARGETS := \
 	ath79-generic \
 	ath79-nand \
-	brcm2708-bcm2708 \
-	brcm2708-bcm2709 \
+	bcm27xx-bcm2708 \
+	bcm27xx-bcm2709 \
 	ipq40xx-generic \
 	ipq40xx-mikrotik \
 	ipq806x-generic \
@@ -24,7 +24,7 @@ ifeq (,$(GLUON_TARGETS))
 	x86-64
 ifneq (,$(BROKEN))
   GLUON_TARGETS += \
-	brcm2708-bcm2710 \
+	bcm27xx-bcm2710 \
 	mvebu-cortexa9 \
 	ramips-rt305x \
 	sunxi-cortexa7 \
