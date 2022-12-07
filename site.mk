@@ -362,8 +362,8 @@ ifeq ($(GLUON_TARGET),lantiq-xway)
 		$(USB_PACKAGES_WITHOUT_HID)
 endif
 
-# mpc85xx-generic
-ifeq ($(GLUON_TARGET),mpc85xx-generic)
+# mpc85xx-p1010
+ifeq ($(GLUON_TARGET),mpc85xx-p1010)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
 		$(TLS_PACKAGES)

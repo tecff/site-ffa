@@ -15,7 +15,7 @@ ifeq (,$(GLUON_TARGETS))
 	ipq806x-generic \
 	lantiq-xrx200 \
 	lantiq-xway \
-	mpc85xx-generic \
+	mpc85xx-p1010 \
 	mpc85xx-p1020 \
 	mediatek-mt7622 \
 	ramips-mt7620 \
