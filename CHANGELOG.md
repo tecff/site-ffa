@@ -1,5 +1,13 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v12
+ - Update to Gluon v2021.1.2+
+   - includes a small bugfix for respondd under load
+ - multidomain setup
+   - new feature that allows to split the network into multiple smaller ones
+   - site.mk: enable MULTIDOMAIN and config-mode-domain-select and tecff-domain-director
+   - create 12 domains/segments: legacy, default, event and 9 regional
+
 ## v11.1
  - Update to Gluon v2021.1.2 (see upstream release notes!)
    - Changes: https://gluon.readthedocs.io/en/v2021.1.x/releases/v2021.1.2.html
