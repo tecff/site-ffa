@@ -1,5 +1,8 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v12.1
+ - small bugfix in domain config, domain freising was configured incorrectly
+
 ## v12
  - Update to Gluon v2021.1.2+
    - includes a small bugfix for respondd under load
