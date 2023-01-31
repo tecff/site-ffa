@@ -44,8 +44,7 @@ GLUON_SITE_PACKAGES := \
 # packages for non-tiny standard devices - devices with >=7M flash and >=64M memory
 GLUON_SITE_PACKAGES_standard := \
 	respondd-module-airtime \
-	tecff-aptimeclock \
-	tecff-vpnlimittimeclock
+	tecff-aptimeclock
 
 # packages for tiny devices - e.g. devices with <64M memory
 GLUON_SITE_PACKAGES_tiny := \
@@ -326,6 +325,8 @@ ifeq ($(GLUON_TARGET),ipq40xx-generic)
 	GLUON_SITE_PACKAGES += \
 		$(USB_PACKAGES_WITHOUT_HID) \
 		$(TLS_PACKAGES)
+
+	# no USB port
 	GLUON_aruba-ap-303_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_aruba-ap-303h_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_aruba-ap-365_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
