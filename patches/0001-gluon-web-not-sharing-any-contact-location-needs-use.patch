@@ -1,0 +1,50 @@
+diff --git a/package/gluon-web-model/files/lib/gluon/web/view/model/form.html b/package/gluon-web-model/files/lib/gluon/web/view/model/form.html
+index 6b35fe89..a64ab9dc 100644
+--- a/package/gluon-web-model/files/lib/gluon/web/view/model/form.html
++++ b/package/gluon-web-model/files/lib/gluon/web/view/model/form.html
+@@ -24,4 +24,45 @@
+ 		">
+ 	<% end %>
+ 	</div>
++
++	<script type="text/javascript">
++	//<![CDATA[
++		function $ (selector, el) {
++			if (!el) {el = document;}
++			return el.querySelector(selector);
++		}
++		var inputContact = $("input[name$='contact']");
++		if (typeof(inputContact) != 'undefined' && inputContact != null) {
++			var form = $("form");
++			function isEmpty(elem) {
++				if (elem == null || elem.value == null || elem.value == "" || elem.value == "0")
++					return true
++				return false
++			}
++			form.addEventListener('submit', function formSubmit(evt) {
++				var inputLocation = $("input[name$='location']");
++				var inputShareLocation = $("input[name$='share_location']");
++				var inputLocLat = $("input[name$='latitude']");
++				var inputLocLong = $("input[name$='longitude']");
++				var confirmContact = true;
++				var confirmLocation = true;
++				var confirmShareLocation = true;
++				if (isEmpty(inputContact))
++					confirmContact = confirm("Willst Du wirklich keine Kontaktinformation hinterlegen? Unsere Gemeinschaftsrichtlinien verlangen die Erreichbarkeit des Knotenbetreibers.");
++				if (isEmpty(inputLocation) || isEmpty(inputLocLat) || isEmpty(inputLocLong)) {
++					confirmLocation = confirm("Willst Du wirklich keinen Standort angeben? Unsere Gemeinschaftsrichtlinien verlangen die Veröffentlichung des korrekten Knotenstandortes und Ausnahmen nur nach Absprache.");
++				} else if (isEmpty(inputShareLocation)) {
++					confirmShareLocation = confirm("Willst Du den Knotenstandort wirklich nicht veröffentlichen? Unsere Gemeinschaftsrichtlinien verlangen die Veröffentlichung des korrekten Knotenstandortes und Ausnahmen nur nach Absprache.");
++				}
++				if (!confirmContact || !confirmLocation || !confirmShareLocation) {
++					evt.returnValue = false;
++					if (evt.preventDefault) evt.preventDefault();
++					return false;
++				}
++				return true;
++			}, false);
++		}
++	//]]>
++	</script>
++
+ </form>
