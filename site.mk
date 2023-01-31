@@ -37,7 +37,6 @@ GLUON_SITE_PACKAGES := \
 	tecff-banner \
 	tecff-broken-wlan-workaround \
 	tecff-button-bind \
-	tecff-domain-director \
 	tecff-general-workaround \
 	tecff-ssid-changer
 
