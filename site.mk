@@ -44,8 +44,7 @@ GLUON_SITE_PACKAGES := \
 # packages for non-tiny standard devices - devices with >=7M flash and >=64M memory
 GLUON_SITE_PACKAGES_standard := \
 	respondd-module-airtime \
-	tecff-aptimeclock \
-	tecff-vpnlimittimeclock
+	tecff-aptimeclock
 
 # packages for tiny devices - e.g. devices with <64M memory
 GLUON_SITE_PACKAGES_tiny := \
