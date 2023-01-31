@@ -2,6 +2,7 @@ GLUON_BUILD_DIR := gluon-build
 GLUON_GIT_URL := https://github.com/tecff/gluon.git
 GLUON_GIT_REF := d1c2e919005266d24fb7bb25c1cded6f40774be7
 
+PATCH_DIR := ./patches
 SECRET_KEY_FILE ?= ${HOME}/.gluon-secret-key
 
 ifeq (,$(GLUON_TARGETS))
@@ -99,8 +100,12 @@ gluon-prepare: output-clean ${GLUON_BUILD_DIR}
 	  && git remote set-url origin ${GLUON_GIT_URL} \
 	  && git fetch origin \
 	  && git checkout -q ${GLUON_GIT_REF})
+	$(MAKE) gluon-patch
 	ln -sfT .. ${GLUON_BUILD_DIR}/site
 	$(MAKE) ${GLUON_MAKEFLAGS} update
+
+gluon-patch:
+	scripts/apply_patches.sh ${GLUON_BUILD_DIR} ${PATCH_DIR}
 
 clean:
 	@echo '# starting clean...'
@@ -108,7 +113,6 @@ clean:
 		echo ""Cleaning target $$target""; \
 		$(MAKE) -C ${GLUON_BUILD_DIR} clean GLUON_TARGET="$$target"; \
 	done
-
 
 gluon-clean:
 	@echo '# removing build directory...'
