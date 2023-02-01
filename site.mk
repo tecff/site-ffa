@@ -15,6 +15,7 @@ GLUON_FEATURES := \
 	radvd \
 	radv-filterd \
 	respondd \
+	state-check \
 	status-page \
 	web-advanced \
 	web-private-wifi \
