@@ -27,6 +27,7 @@ msgstr ""
 msgid "gluon-config-mode:pubkey"
 msgstr ""
 " "
+
 msgid "gluon-config-mode:reboot"
 msgstr ""
 "<p>Your node is currently rebooting and will try to connect to other "
