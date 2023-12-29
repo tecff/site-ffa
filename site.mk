@@ -306,6 +306,7 @@ ifeq ($(GLUON_TARGET),ath79-generic)
 	GLUON_tp-link-wbs210-v1_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_tp-link-wbs210-v2_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_tp-link-wbs510-v1_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
+	GLUON_ubiquiti-nanobeam-m5-xw_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_ubiquiti-nanostation-loco-m-xw_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 	GLUON_ubiquiti-nanostation-m-xw_SITE_PACKAGES += $(NO_USB_PACKAGES_WITHOUT_HID)
 # device not yet supported in ath79 but formerly supported in ar71xx
