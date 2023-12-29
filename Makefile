@@ -92,6 +92,7 @@ sign: build manifest move-output
 	${GLUON_BUILD_DIR}/contrib/sign.sh ${SECRET_KEY_FILE} output/images/sysupgrade/${GLUON_AUTOUPDATER_BRANCH}.manifest
 
 ${GLUON_BUILD_DIR}:
+	@echo '# cloning sources...'
 	git clone ${GLUON_GIT_URL} ${GLUON_BUILD_DIR}
 
 gluon-prepare: output-clean ${GLUON_BUILD_DIR}
@@ -114,9 +115,11 @@ clean:
 gluon-clean:
 	@echo '# removing build directory...'
 	rm -rf ${GLUON_BUILD_DIR}
+	@echo '# build directory removed.'
 
 output-clean:
 	@echo '# removing output of last build...'
 	rm -rf output
+	@echo '# output of last build removed.'
 
 dirclean: gluon-clean output-clean
