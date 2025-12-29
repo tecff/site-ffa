@@ -1,5 +1,44 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v13
+
+This release is only available for devices with more than 4MB of flash.
+Devices with less space will only get a minor update v12.2, please replace these devices in the near future.
+
+Update to Gluon v2023.1.x (see upstream release notes!)
+ - https://gluon.readthedocs.io/en/v2023.1.x/releases/v2022.1.html
+ - https://gluon.readthedocs.io/en/v2023.1.x/releases/v2022.1.1.html
+ - https://gluon.readthedocs.io/en/v2023.1.x/releases/v2022.1.2.html
+ - https://gluon.readthedocs.io/en/v2023.1.x/releases/v2022.1.4.html
+ - https://gluon.readthedocs.io/en/v2023.1.x/releases/v2023.1.html
+ - https://gluon.readthedocs.io/en/v2023.1.x/releases/v2023.1.2.html
+ - additional bugfixes committed after v2023.1.2
+
+switch from maintaining a gluon fork to applying patches during build process
+
+Update site.conf
+ - change autoupdater path for legacy devices
+ - remove old gw02
+ - set default domain to tecff_default
+ - remove obsolete domain_directory config
+ - re-activate dns cache on nodes
+
+Update site.mk
+ - remove obsolete tecff-domain-director
+ - remove broken tecff-vpnlimittimeclock
+ - use wolfssl instead of mbedtls
+ - add targets:
+   - ath79-nand
+   - ipq40xx-mikrotik
+   - mediatek-mt7622
+ - remove USB packages from many devices where space is scarce
+
+Multiple bugfixes and improvements in various packages:
+ - autoupdater-wifi-fallback
+ - broken-wlan-workaround
+ - general-workaround
+ - ssid-changer
+
 ## v12.2
 
 This release and any further v12.x release is only meant for old legacy devices with only 4MB of flash.
