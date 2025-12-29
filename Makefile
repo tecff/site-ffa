@@ -66,7 +66,7 @@ info:
 	@echo '#########################'
 	@echo '# TECFF Firmware build'
 	@echo '# GLUON_RELEASE: ${GLUON_RELEASE}'
-	@echo '# GLUON_AUTOUPDATER_BRANCH:  ${GLUON_AUTOUPDATER_BRANCH}'
+	@echo '# GLUON_AUTOUPDATER_BRANCH: ${GLUON_AUTOUPDATER_BRANCH}'
 	@echo '# GLUON_GIT_URL: ${GLUON_GIT_URL}'
 	@echo '# GLUON_GIT_REF: ${GLUON_GIT_REF}'
 	@echo '#########################'
