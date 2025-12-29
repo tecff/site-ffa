@@ -1,5 +1,29 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v12.2
+
+This release and any further v12.x release is only meant for old legacy devices with only 4MB of flash.
+They can't receive any major update in the future, please replace these devices.
+Devices with more space will be updated directly to release v13.
+
+ - Update site.conf
+   - change autoupdater path for legacy devices
+   - remove old gw02
+   - set default domain to tecff_default
+   - remove obsolete domain_directory config
+ - Update site.mk
+   - remove obsolete tecff-domain-director
+   - remove broken tecff-vpnlimittimeclock
+   - use wolfssl instead of mbedtls
+   - save space by removing two config mode options:
+     - config-mode-geo-location-osm
+     - web-private-wifi
+ - Multiple bugfixes and improvements in various packages:
+   - autoupdater-wifi-fallback
+   - broken-wlan-workaround
+   - general-workaround
+   - ssid-changer
+
 ## v12.1
  - small bugfix in domain config, domain freising was configured incorrectly
 
