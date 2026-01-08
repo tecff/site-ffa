@@ -103,8 +103,6 @@ pkgs_usb_net = {
 	'kmod-brcmfmac',
 	'kmod-carl9170',
 	'kmod-mii',
-	'kmod-rt73-usb',
-	'kmod-rtl8187',
 	'kmod-rtl8192cu',
 	'kmod-usb-net',
 	'kmod-usb-net-asix',
