@@ -221,7 +221,6 @@ if device({
 	'tp-link-re200-v2',
 	'tp-link-re200-v3',
 	'tp-link-re200-v4',
-	'tp-link-re305',
 	'tp-link-re500-v1',
 	'tp-link-re650-v1',
 	'tp-link-tl-mr6400-v1',
