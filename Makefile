@@ -18,6 +18,7 @@ ifeq (,$(GLUON_TARGETS))
 	lantiq-xway \
 	mpc85xx-p1010 \
 	mpc85xx-p1020 \
+	mediatek-filogic \
 	mediatek-mt7622 \
 	ramips-mt7620 \
 	ramips-mt7621 \
