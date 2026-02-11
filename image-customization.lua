@@ -217,6 +217,7 @@ if device({
 	'tp-link-archer-c50-v3',
 	'tp-link-archer-c50-v4',
 	'tp-link-archer-c50-v5',
+	'tp-link-archer-c50-v6-ca-eu-ru',
 	'tp-link-eap615-wall-v1',
 	'tp-link-re200-v2',
 	'tp-link-re200-v3',
