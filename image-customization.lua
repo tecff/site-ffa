@@ -183,6 +183,7 @@ if device({
 	'tp-link-tl-mr3420-v5',
 	'tp-link-tl-mr6400-v5',
 	'tp-link-tl-wr902ac-v3',
+	'tp-link-tl-wr902ac-v4',
 }) then
 	include_usb = false
 end
