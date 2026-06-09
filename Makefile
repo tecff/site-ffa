@@ -1,6 +1,6 @@
 GLUON_BUILD_DIR := gluon-build
 GLUON_GIT_URL := https://github.com/freifunk-gluon/gluon.git
-GLUON_GIT_REF := ae577b7f04bf670b50b7a3ba7b9d013d033d4052
+GLUON_GIT_REF := a8bbbac7aef614cf82b8d194572182bbd878f69b
 
 PATCH_DIR := ./patches
 SECRET_KEY_FILE ?= ${HOME}/.gluon-secret-key
