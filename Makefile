@@ -49,7 +49,7 @@ MAKE_PID := $(shell echo $$PPID)
 JOB_FLAG := $(filter -j%, $(subst -j ,-j,$(shell ps T | grep "^\s*$(MAKE_PID).*$(MAKE)")))
 JOBS     := $(subst -j,,${JOB_FLAG})
 ifeq (,$(strip ${JOBS}))
-  JOBS := $(shell cat /proc/cpuinfo | grep processor | wc -l)
+  JOBS := $(shell sysctl -n hw.ncpu 2>/dev/null || getconf _NPROCESSORS_ONLN 2>/dev/null || echo 1)
 endif
 
 GLUON_MAKEFLAGS := -j${JOBS} -C ${GLUON_BUILD_DIR} \
@@ -103,7 +103,7 @@ gluon-prepare: output-clean ${GLUON_BUILD_DIR}
 	  && git fetch origin \
 	  && git checkout -q ${GLUON_GIT_REF})
 	$(MAKE) gluon-patch
-	ln -sfT .. ${GLUON_BUILD_DIR}/site
+	rm -f ${GLUON_BUILD_DIR}/site && ln -sf .. ${GLUON_BUILD_DIR}/site
 	$(MAKE) ${GLUON_MAKEFLAGS} update
 
 gluon-patch:
