@@ -34,10 +34,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN mkdir /tmp/ec &&\
-    wget -O /tmp/ec/ec-${TARGETOS}-${TARGETARCH}.tar.gz https://github.com/editorconfig-checker/editorconfig-checker/releases/download/2.7.0/ec-${TARGETOS}-${TARGETARCH}.tar.gz &&\
-    tar -xvzf /tmp/ec/ec-${TARGETOS}-${TARGETARCH}.tar.gz &&\
-    mv bin/ec-${TARGETOS}-${TARGETARCH} /usr/local/bin/editorconfig-checker &&\
+RUN mkdir -p /tmp/ec && \
+    wget -O /tmp/ec/ec-${TARGETOS}-${TARGETARCH}.tar.gz https://github.com/editorconfig-checker/editorconfig-checker/releases/download/2.7.0/ec-${TARGETOS}-${TARGETARCH}.tar.gz && \
+    tar -C /tmp/ec -xzf /tmp/ec/ec-${TARGETOS}-${TARGETARCH}.tar.gz && \
+    mv /tmp/ec/bin/ec-${TARGETOS}-${TARGETARCH} /usr/local/bin/editorconfig-checker && \
+    chmod 0755 /usr/local/bin/editorconfig-checker && \
     rm -rf /tmp/ec
 
 RUN useradd -m -d /gluon -u 100 -g 100 -o gluon
