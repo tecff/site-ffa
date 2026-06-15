@@ -47,7 +47,7 @@ pipeline {
                     env.GLUON_CACHE_DIR = "${env.GLUON_CACHE_BASE}/${safeBranch}"
                 }
 
-                sh '''
+                sh '''#!/usr/bin/env bash
                     set -euo pipefail
                     mkdir -p "$GLUON_CACHE_DIR"
                     docker build --pull \
@@ -81,7 +81,7 @@ pipeline {
 
                     if (params.SIGN_BUILD) {
                         withCredentials([file(credentialsId: 'gluon-secret-key', variable: 'SECRET_KEY_PATH')]) {
-                            sh """
+                            sh """#!/usr/bin/env bash
                                 set -euo pipefail
                                 docker run --rm \
                                     --user \$(id -u):\$(id -g) \
@@ -95,7 +95,7 @@ pipeline {
                             """
                         }
                     } else {
-                        sh """
+                        sh """#!/usr/bin/env bash
                             set -euo pipefail
                             docker run --rm \
                                 --user \$(id -u):\$(id -g) \
