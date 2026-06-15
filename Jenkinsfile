@@ -49,12 +49,29 @@ pipeline {
 
                 sh '''#!/usr/bin/env bash
                     set -euo pipefail
-                    mkdir -p "$GLUON_CACHE_DIR"
                     docker build --pull \
                         --build-arg TARGETOS=linux \
                         --build-arg TARGETARCH="$TARGETARCH" \
                         -t "$BUILD_IMAGE" \
                         -f contrib/docker/Dockerfile .
+                '''
+            }
+        }
+
+        stage('Prepare gluon-build cache') {
+            steps {
+                sh '''#!/usr/bin/env bash
+                    set -euo pipefail
+                    mkdir -p "$GLUON_CACHE_DIR"
+                    # Seed a real clone only if the cache isn't already a git repo.
+                    # The Makefile only clones when gluon-build is MISSING; the mount makes it
+                    # always exist, so we must populate it ourselves the first time.
+                    if [ ! -d "$GLUON_CACHE_DIR/.git" ]; then
+                        echo "# cache empty -> cloning gluon into cache"
+                        git clone https://github.com/freifunk-gluon/gluon.git "$GLUON_CACHE_DIR"
+                    else
+                        echo "# gluon-build cache already initialized"
+                    fi
                 '''
             }
         }
