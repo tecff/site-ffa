@@ -7,6 +7,11 @@ pipeline {
         disableConcurrentBuilds()
     }
 
+    environment {
+        // persistent gluon-build cache on the Jenkins agent, one directory per branch
+        GLUON_CACHE_BASE = '/var/cache/jenkins/gluon-build'
+    }
+
     parameters {
         string(name: 'GLUON_TARGETS', defaultValue: '', description: 'Optional: override GLUON_TARGETS (space-separated). Empty = use Makefile defaults.')
         string(name: 'GLUON_AUTOUPDATER_BRANCH', defaultValue: 'experimental', description: 'Autoupdater branch (e.g. experimental, stable). Required when SIGN_BUILD=true.')
@@ -35,10 +40,16 @@ pipeline {
                     def safeTag = env.BUILD_TAG.replaceAll('[^a-zA-Z0-9._-]', '-')
                     env.BUILD_IMAGE = "site-ffa-gluon-buildenv:${safeTag}"
                     env.TARGETARCH = targetArch
+
+                    // per-branch cache dir, created by Jenkins (correct ownership, no Docker volume permission issues)
+                    def safeBranch = (env.BRANCH_NAME ?: env.GIT_BRANCH?.replaceFirst('origin/', '') ?: 'unknown')
+                                         .replaceAll('[^a-zA-Z0-9._-]', '-')
+                    env.GLUON_CACHE_DIR = "${env.GLUON_CACHE_BASE}/${safeBranch}"
                 }
 
                 sh '''
                     set -euo pipefail
+                    mkdir -p "$GLUON_CACHE_DIR"
                     docker build --pull \
                         --build-arg TARGETOS=linux \
                         --build-arg TARGETARCH="$TARGETARCH" \
@@ -65,6 +76,9 @@ pipeline {
                     }
                     def makeTarget = params.SIGN_BUILD ? 'sign' : 'all'
 
+                    // gluon-build mounted from host cache — survives cleanWs(), avoids re-clone and toolchain rebuild
+                    def cacheMount = '-v "$GLUON_CACHE_DIR":/gluon/gluon-build'
+
                     if (params.SIGN_BUILD) {
                         withCredentials([file(credentialsId: 'gluon-secret-key', variable: 'SECRET_KEY_PATH')]) {
                             sh """
@@ -73,6 +87,7 @@ pipeline {
                                     --user \$(id -u):\$(id -g) \
                                     -e HOME=/gluon \
                                     -v "\$PWD":/gluon \
+                                    ${cacheMount} \
                                     -v "\$SECRET_KEY_PATH":/run/secrets/gluon-secret-key:ro \
                                     -w /gluon \
                                     "\$BUILD_IMAGE" \
@@ -86,6 +101,7 @@ pipeline {
                                 --user \$(id -u):\$(id -g) \
                                 -e HOME=/gluon \
                                 -v "\$PWD":/gluon \
+                                ${cacheMount} \
                                 -w /gluon \
                                 "\$BUILD_IMAGE" \
                                 bash -lc "set -euo pipefail; make ${jobsFlag} ${makeVars} ${makeTarget}"
@@ -102,6 +118,7 @@ pipeline {
             sh 'docker rmi -f "$BUILD_IMAGE" >/dev/null 2>&1 || true'
         }
         cleanup {
+            // workspace only — gluon-build cache lives in GLUON_CACHE_DIR on the agent
             cleanWs()
         }
     }
