@@ -1,11 +1,5 @@
 pipeline {
-    agent {
-        dockerfile {
-            filename 'contrib/docker/Dockerfile'
-            additionalBuildArgs '--no-cache'
-            args '-v /tmp/gluon-cache:/build/gluon-build'
-        }
-    }
+    agent any
 
     options {
         timestamps()
@@ -13,8 +7,8 @@ pipeline {
         disableConcurrentBuilds()
     }
 
-    environment {
-        GLUON_TARGETS = 'ath79-generic x86-64'
+    parameters {
+        string(name: 'GLUON_TARGETS', defaultValue: '', description: 'Optional: override GLUON_TARGETS (space-separated). Empty = use Makefile defaults.')
     }
 
     stages {
@@ -24,27 +18,63 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Build build-env image') {
             steps {
-                sh 'make GLUON_TARGETS="${GLUON_TARGETS}"'
+                script {
+                    def hostArch = sh(returnStdout: true, script: 'uname -m').trim()
+                    def targetArch = (hostArch == 'x86_64') ? 'amd64' :
+                                     (hostArch == 'aarch64') ? 'arm64' :
+                                     null
+                    if (targetArch == null) {
+                        error("Unsupported build node arch: ${hostArch}. Map it to Docker TARGETARCH first.")
+                    }
+                    // sanitize BUILD_TAG: slashes from folder-based job names break Docker tag syntax
+                    def safeTag = env.BUILD_TAG.replaceAll('[^a-zA-Z0-9._-]', '-')
+                    env.BUILD_IMAGE = "site-ffa-gluon-buildenv:${safeTag}"
+                    env.TARGETARCH = targetArch
+                }
+
+                sh '''
+                    set -euo pipefail
+                    docker build --pull \
+                        --build-arg TARGETOS=linux \
+                        --build-arg TARGETARCH="$TARGETARCH" \
+                        -t "$BUILD_IMAGE" \
+                        -f contrib/docker/Dockerfile .
+                '''
             }
         }
 
-        stage('Archive') {
+        stage('Build firmware') {
             steps {
-                archiveArtifacts artifacts: 'output/**', fingerprint: true
+                script {
+                    def targetOverride = ''
+                    if (params.GLUON_TARGETS?.trim()) {
+                        targetOverride = "GLUON_TARGETS='${params.GLUON_TARGETS.trim()}'"
+                    }
+
+                    // run as Jenkins uid/gid so workspace files stay accessible outside the container
+                    sh """
+                        set -euo pipefail
+                        docker run --rm \
+                            --user \$(id -u):\$(id -g) \
+                            -e HOME=/gluon \
+                            -v "\$PWD":/gluon \
+                            -w /gluon \
+                            "\$BUILD_IMAGE" \
+                            bash -lc "set -euo pipefail; make ${targetOverride} all"
+                    """
+                }
             }
         }
     }
 
     post {
-        failure {
-            echo 'Build failed.'
-        }
-        success {
-            echo 'Build successful.'
-        }
         always {
+            archiveArtifacts artifacts: 'output/**', allowEmptyArchive: true, fingerprint: true
+            sh 'docker rmi -f "$BUILD_IMAGE" >/dev/null 2>&1 || true'
+        }
+        cleanup {
             cleanWs()
         }
     }

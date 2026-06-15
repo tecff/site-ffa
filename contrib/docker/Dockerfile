@@ -1,34 +1,47 @@
-FROM ubuntu:22.04
+FROM debian:bookworm-slim
 
-ENV DEBIAN_FRONTEND=noninteractive
+ARG TARGETOS
+ARG TARGETARCH
 
-RUN apt-get update && apt-get install -y \
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
-    gcc \
-    g++ \
-    binutils \
-    flex \
-    bison \
-    python3 \
-    python3-distutils \
-    python3-dev \
-    perl \
-    libssl-dev \
-    libncurses-dev \
-    libz-dev \
-    unzip \
-    zip \
-    gawk \
-    gettext \
-    wget \
-    curl \
-    git \
-    rsync \
-    subversion \
-    file \
     ca-certificates \
+    clang \
+    ecdsautils \
+    file \
+    gawk \
+    git \
+    libelf-dev \
+    libncurses5-dev \
+    libnss-unknown \
+    libssl-dev \
+    llvm \
+    lua-check \
+    openssh-client \
+    python3 \
+    python3-dev \
+    python3-pyelftools \
+    python3-setuptools \
+    qemu-utils \
+    rsync \
+    shellcheck \
+    swig \
+    time \
+    unzip \
+    wget \
+    zlib1g-dev \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd -m -u 1000 builder
-USER builder
-WORKDIR /build
+RUN mkdir /tmp/ec &&\
+    wget -O /tmp/ec/ec-${TARGETOS}-${TARGETARCH}.tar.gz https://github.com/editorconfig-checker/editorconfig-checker/releases/download/2.7.0/ec-${TARGETOS}-${TARGETARCH}.tar.gz &&\
+    tar -xvzf /tmp/ec/ec-${TARGETOS}-${TARGETARCH}.tar.gz &&\
+    mv bin/ec-${TARGETOS}-${TARGETARCH} /usr/local/bin/editorconfig-checker &&\
+    rm -rf /tmp/ec
+
+RUN useradd -m -d /gluon -u 100 -g 100 -o gluon
+USER gluon
+
+VOLUME /gluon
+WORKDIR /gluon
