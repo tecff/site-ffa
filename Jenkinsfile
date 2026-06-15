@@ -9,7 +9,9 @@ pipeline {
 
     parameters {
         string(name: 'GLUON_TARGETS', defaultValue: '', description: 'Optional: override GLUON_TARGETS (space-separated). Empty = use Makefile defaults.')
-        booleanParam(name: 'SIGN_BUILD', defaultValue: false, description: 'Sign the autoupdater manifest. Requires tagged release and gluon-secret-key credential in Jenkins.')
+        string(name: 'GLUON_AUTOUPDATER_BRANCH', defaultValue: 'experimental', description: 'Autoupdater branch (e.g. experimental, stable). Required when SIGN_BUILD=true.')
+        string(name: 'JOBS', defaultValue: '', description: 'Parallel make jobs (e.g. 9). Empty = auto-detect from /proc/cpuinfo.')
+        booleanParam(name: 'SIGN_BUILD', defaultValue: false, description: 'Sign the autoupdater manifest. Requires gluon-secret-key credential in Jenkins.')
     }
 
     stages {
@@ -49,7 +51,19 @@ pipeline {
         stage('Build firmware') {
             steps {
                 script {
-                    def targetOverride = params.GLUON_TARGETS?.trim() ? "GLUON_TARGETS='${params.GLUON_TARGETS.trim()}'" : ''
+                    if (params.SIGN_BUILD && !params.GLUON_AUTOUPDATER_BRANCH?.trim()) {
+                        error('SIGN_BUILD=true requires GLUON_AUTOUPDATER_BRANCH to be set.')
+                    }
+
+                    def jobsFlag = params.JOBS?.trim() ? "-j${params.JOBS.trim()}" : ''
+                    def makeVars = "V=s BUILD_LOG=1"
+                    if (params.GLUON_TARGETS?.trim()) {
+                        makeVars += " GLUON_TARGETS='${params.GLUON_TARGETS.trim()}'"
+                    }
+                    if (params.GLUON_AUTOUPDATER_BRANCH?.trim()) {
+                        makeVars += " GLUON_AUTOUPDATER_BRANCH='${params.GLUON_AUTOUPDATER_BRANCH.trim()}'"
+                    }
+                    def makeTarget = params.SIGN_BUILD ? 'sign' : 'all'
 
                     if (params.SIGN_BUILD) {
                         withCredentials([file(credentialsId: 'gluon-secret-key', variable: 'SECRET_KEY_PATH')]) {
@@ -62,7 +76,7 @@ pipeline {
                                     -v "\$SECRET_KEY_PATH":/run/secrets/gluon-secret-key:ro \
                                     -w /gluon \
                                     "\$BUILD_IMAGE" \
-                                    bash -lc "set -euo pipefail; make ${targetOverride} SECRET_KEY_FILE=/run/secrets/gluon-secret-key sign"
+                                    bash -lc "set -euo pipefail; make ${jobsFlag} ${makeVars} SECRET_KEY_FILE=/run/secrets/gluon-secret-key ${makeTarget}"
                             """
                         }
                     } else {
@@ -74,7 +88,7 @@ pipeline {
                                 -v "\$PWD":/gluon \
                                 -w /gluon \
                                 "\$BUILD_IMAGE" \
-                                bash -lc "set -euo pipefail; make ${targetOverride} all"
+                                bash -lc "set -euo pipefail; make ${jobsFlag} ${makeVars} ${makeTarget}"
                         """
                     }
                 }
