@@ -9,6 +9,7 @@ pipeline {
 
     parameters {
         string(name: 'GLUON_TARGETS', defaultValue: '', description: 'Optional: override GLUON_TARGETS (space-separated). Empty = use Makefile defaults.')
+        booleanParam(name: 'SIGN_BUILD', defaultValue: false, description: 'Sign the autoupdater manifest. Requires tagged release and gluon-secret-key credential in Jenkins.')
     }
 
     stages {
@@ -48,22 +49,34 @@ pipeline {
         stage('Build firmware') {
             steps {
                 script {
-                    def targetOverride = ''
-                    if (params.GLUON_TARGETS?.trim()) {
-                        targetOverride = "GLUON_TARGETS='${params.GLUON_TARGETS.trim()}'"
-                    }
+                    def targetOverride = params.GLUON_TARGETS?.trim() ? "GLUON_TARGETS='${params.GLUON_TARGETS.trim()}'" : ''
 
-                    // run as Jenkins uid/gid so workspace files stay accessible outside the container
-                    sh """
-                        set -euo pipefail
-                        docker run --rm \
-                            --user \$(id -u):\$(id -g) \
-                            -e HOME=/gluon \
-                            -v "\$PWD":/gluon \
-                            -w /gluon \
-                            "\$BUILD_IMAGE" \
-                            bash -lc "set -euo pipefail; make ${targetOverride} all"
-                    """
+                    if (params.SIGN_BUILD) {
+                        withCredentials([file(credentialsId: 'gluon-secret-key', variable: 'SECRET_KEY_PATH')]) {
+                            sh """
+                                set -euo pipefail
+                                docker run --rm \
+                                    --user \$(id -u):\$(id -g) \
+                                    -e HOME=/gluon \
+                                    -v "\$PWD":/gluon \
+                                    -v "\$SECRET_KEY_PATH":/run/secrets/gluon-secret-key:ro \
+                                    -w /gluon \
+                                    "\$BUILD_IMAGE" \
+                                    bash -lc "set -euo pipefail; make ${targetOverride} SECRET_KEY_FILE=/run/secrets/gluon-secret-key sign"
+                            """
+                        }
+                    } else {
+                        sh """
+                            set -euo pipefail
+                            docker run --rm \
+                                --user \$(id -u):\$(id -g) \
+                                -e HOME=/gluon \
+                                -v "\$PWD":/gluon \
+                                -w /gluon \
+                                "\$BUILD_IMAGE" \
+                                bash -lc "set -euo pipefail; make ${targetOverride} all"
+                        """
+                    }
                 }
             }
         }
