@@ -98,7 +98,7 @@ pipeline {
                                 docker run --rm \
                                     --user \$(id -u):\$(id -g) \
                                     -e HOME=/gluon \
-                                    -v "\$PWD":/gluon \
+                                    -v "\$WORKSPACE":/gluon \
                                     ${cacheMount} \
                                     -v "\$SECRET_KEY_PATH":/run/secrets/gluon-secret-key:ro \
                                     -w /gluon \
@@ -112,7 +112,7 @@ pipeline {
                             docker run --rm \
                                 --user \$(id -u):\$(id -g) \
                                 -e HOME=/gluon \
-                                -v "\$PWD":/gluon \
+                                -v "\$WORKSPACE":/gluon \
                                 ${cacheMount} \
                                 -w /gluon \
                                 "\$BUILD_IMAGE" \
