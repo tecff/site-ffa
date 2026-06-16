@@ -8,7 +8,7 @@ pipeline {
     }
 
     environment {
-        GLUON_CACHE_BASE = '/var/cache/jenkins/gluon-build'
+        GLUON_CACHE_BASE = '/var/lib/jenkins/gluon-build-cache'
     }
 
     parameters {
