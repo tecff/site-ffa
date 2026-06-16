@@ -89,7 +89,7 @@ pipeline {
                         makeVars += " GLUON_AUTOUPDATER_BRANCH='${params.GLUON_AUTOUPDATER_BRANCH.trim()}'"
                     }
                     def makeTarget = params.SIGN_BUILD ? 'sign' : 'all'
-                    def cacheMount = '-v "$GLUON_CACHE_DIR":/gluon/gluon-build'
+                    def cacheMount = '-v "$GLUON_CACHE_DIR":/gluon/gluon-build --tmpfs /tmp'
 
                     if (params.SIGN_BUILD) {
                         withCredentials([file(credentialsId: 'gluon-secret-key', variable: 'SECRET_KEY_PATH')]) {
