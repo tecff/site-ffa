@@ -8,7 +8,6 @@ pipeline {
     }
 
     environment {
-        // persistent gluon-build cache on the Jenkins agent, one directory per branch
         GLUON_CACHE_BASE = '/var/cache/jenkins/gluon-build'
     }
 
@@ -26,6 +25,27 @@ pipeline {
             }
         }
 
+        stage('Prepare gluon-build cache') {
+            steps {
+                script {
+                    def safeBranch = (env.BRANCH_NAME ?: env.GIT_BRANCH?.replaceFirst('origin/', '') ?: 'unknown')
+                                         .replaceAll('[^a-zA-Z0-9._-]', '-')
+                    env.GLUON_CACHE_DIR = "${env.GLUON_CACHE_BASE}/${safeBranch}"
+                }
+
+                sh '''#!/usr/bin/env bash
+                    set -euo pipefail
+                    mkdir -p "$GLUON_CACHE_DIR"
+                    if [ ! -d "$GLUON_CACHE_DIR/.git" ]; then
+                        echo "# cache empty -> cloning gluon into cache"
+                        git clone https://github.com/freifunk-gluon/gluon.git "$GLUON_CACHE_DIR"
+                    else
+                        echo "# gluon-build cache already initialized"
+                    fi
+                '''
+            }
+        }
+
         stage('Build build-env image') {
             steps {
                 script {
@@ -36,15 +56,9 @@ pipeline {
                     if (targetArch == null) {
                         error("Unsupported build node arch: ${hostArch}. Map it to Docker TARGETARCH first.")
                     }
-                    // sanitize BUILD_TAG: slashes from folder-based job names break Docker tag syntax
                     def safeTag = env.BUILD_TAG.replaceAll('[^a-zA-Z0-9._-]', '-')
                     env.BUILD_IMAGE = "site-ffa-gluon-buildenv:${safeTag}"
                     env.TARGETARCH = targetArch
-
-                    // per-branch cache dir, created by Jenkins (correct ownership, no Docker volume permission issues)
-                    def safeBranch = (env.BRANCH_NAME ?: env.GIT_BRANCH?.replaceFirst('origin/', '') ?: 'unknown')
-                                         .replaceAll('[^a-zA-Z0-9._-]', '-')
-                    env.GLUON_CACHE_DIR = "${env.GLUON_CACHE_BASE}/${safeBranch}"
                 }
 
                 sh '''#!/usr/bin/env bash
@@ -53,25 +67,8 @@ pipeline {
                         --build-arg TARGETOS=linux \
                         --build-arg TARGETARCH="$TARGETARCH" \
                         -t "$BUILD_IMAGE" \
-                        -f contrib/docker/Dockerfile .
-                '''
-            }
-        }
-
-        stage('Prepare gluon-build cache') {
-            steps {
-                sh '''#!/usr/bin/env bash
-                    set -euo pipefail
-                    mkdir -p "$GLUON_CACHE_DIR"
-                    # Seed a real clone only if the cache isn't already a git repo.
-                    # The Makefile only clones when gluon-build is MISSING; the mount makes it
-                    # always exist, so we must populate it ourselves the first time.
-                    if [ ! -d "$GLUON_CACHE_DIR/.git" ]; then
-                        echo "# cache empty -> cloning gluon into cache"
-                        git clone https://github.com/freifunk-gluon/gluon.git "$GLUON_CACHE_DIR"
-                    else
-                        echo "# gluon-build cache already initialized"
-                    fi
+                        -f "$GLUON_CACHE_DIR/contrib/docker/Dockerfile" \
+                        "$GLUON_CACHE_DIR"
                 '''
             }
         }
@@ -92,8 +89,6 @@ pipeline {
                         makeVars += " GLUON_AUTOUPDATER_BRANCH='${params.GLUON_AUTOUPDATER_BRANCH.trim()}'"
                     }
                     def makeTarget = params.SIGN_BUILD ? 'sign' : 'all'
-
-                    // gluon-build mounted from host cache — survives cleanWs(), avoids re-clone and toolchain rebuild
                     def cacheMount = '-v "$GLUON_CACHE_DIR":/gluon/gluon-build'
 
                     if (params.SIGN_BUILD) {
@@ -135,7 +130,6 @@ pipeline {
             sh 'docker rmi -f "$BUILD_IMAGE" >/dev/null 2>&1 || true'
         }
         cleanup {
-            // workspace only — gluon-build cache lives in GLUON_CACHE_DIR on the agent
             cleanWs()
         }
     }
