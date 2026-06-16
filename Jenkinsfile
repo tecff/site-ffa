@@ -128,6 +128,14 @@ pipeline {
         always {
             archiveArtifacts artifacts: 'output/**', allowEmptyArchive: true, fingerprint: true
             sh 'docker rmi -f "$BUILD_IMAGE" >/dev/null 2>&1 || true'
+            emailext(
+                to: '$DEFAULT_RECIPIENTS',
+                recipientProviders: [requestor()],
+                subject: '$DEFAULT_SUBJECT',
+                body: '$DEFAULT_CONTENT',
+                attachLog: true,
+                compressLog: true
+            )
         }
         cleanup {
             cleanWs()
