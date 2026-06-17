@@ -63,7 +63,7 @@ pipeline {
 
                 sh '''#!/usr/bin/env bash
                     set -euo pipefail
-                    docker build --pull \
+                    docker build --pull --no-cache \
                         --build-arg TARGETOS=linux \
                         --build-arg TARGETARCH="$TARGETARCH" \
                         -t "$BUILD_IMAGE" \
