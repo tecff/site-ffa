@@ -31,6 +31,19 @@ pipeline {
                     def safeBranch = (env.BRANCH_NAME ?: env.GIT_BRANCH?.replaceFirst('origin/', '') ?: 'unknown')
                                          .replaceAll('[^a-zA-Z0-9._-]', '-')
                     env.GLUON_CACHE_DIR = "${env.GLUON_CACHE_BASE}/${safeBranch}"
+
+                    // Extract GLUON_GIT_REF from Makefile
+                    env.GLUON_GIT_REF = sh(
+                        returnStdout: true,
+                        script: "sed -n 's/^GLUON_GIT_REF.*:= *//p' Makefile"
+                    ).trim()
+                    if (!env.GLUON_GIT_REF) {
+                        error("Failed to extract GLUON_GIT_REF from Makefile")
+                    }
+                    if (!(env.GLUON_GIT_REF ==~ /[0-9a-f]{7,40}/)) {
+                        error("Invalid GLUON_GIT_REF (expected commit hash): ${env.GLUON_GIT_REF}")
+                    }
+                    echo "Detected GLUON_GIT_REF: ${env.GLUON_GIT_REF}"
                 }
 
                 sh '''#!/usr/bin/env bash
@@ -42,6 +55,11 @@ pipeline {
                     else
                         echo "# gluon-build cache already initialized"
                     fi
+
+                    echo "# updating cache to GLUON_GIT_REF=$GLUON_GIT_REF"
+                    cd "$GLUON_CACHE_DIR"
+                    git fetch origin
+                    git checkout -q -f "$GLUON_GIT_REF"
                 '''
             }
         }
