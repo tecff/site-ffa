@@ -32,16 +32,23 @@ pipeline {
                                          .replaceAll('[^a-zA-Z0-9._-]', '-')
                     env.GLUON_CACHE_DIR = "${env.GLUON_CACHE_BASE}/${safeBranch}"
 
-                    // Extract GLUON_GIT_REF from Makefile
+                    // Extract GLUON_GIT_REF and GLUON_GIT_URL from Makefile
                     env.GLUON_GIT_REF = sh(
                         returnStdout: true,
                         script: "sed -n 's/^GLUON_GIT_REF.*:= *//p' Makefile"
                     ).trim()
+                    env.GLUON_GIT_URL = sh(
+                        returnStdout: true,
+                        script: "sed -n 's/^GLUON_GIT_URL.*:= *//p' Makefile"
+                    ).trim()
                     if (!env.GLUON_GIT_REF) {
                         error("Failed to extract GLUON_GIT_REF from Makefile")
                     }
-                    if (!(env.GLUON_GIT_REF ==~ /[0-9a-f]{7,40}/)) {
-                        error("Invalid GLUON_GIT_REF (expected commit hash): ${env.GLUON_GIT_REF}")
+                    if (!env.GLUON_GIT_URL) {
+                        error("Failed to extract GLUON_GIT_URL from Makefile")
+                    }
+                    if (!(env.GLUON_GIT_REF ==~ /^[0-9a-zA-Z._-]+$/)) {
+                        error("Invalid GLUON_GIT_REF (expected commit hash or tag): ${env.GLUON_GIT_REF}")
                     }
                     echo "Detected GLUON_GIT_REF: ${env.GLUON_GIT_REF}"
                 }
@@ -51,7 +58,7 @@ pipeline {
                     mkdir -p "$GLUON_CACHE_DIR"
                     if [ ! -d "$GLUON_CACHE_DIR/.git" ]; then
                         echo "# cache empty -> cloning gluon into cache"
-                        git clone https://github.com/freifunk-gluon/gluon.git "$GLUON_CACHE_DIR"
+                        git clone "$GLUON_GIT_URL" "$GLUON_CACHE_DIR"
                     else
                         echo "# gluon-build cache already initialized"
                     fi
