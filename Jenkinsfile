@@ -65,7 +65,7 @@ pipeline {
 
                     echo "# updating cache to GLUON_GIT_REF=$GLUON_GIT_REF"
                     cd "$GLUON_CACHE_DIR"
-                    git fetch origin
+                    git fetch --tags origin
                     git checkout -q -f "$GLUON_GIT_REF"
                 '''
             }
