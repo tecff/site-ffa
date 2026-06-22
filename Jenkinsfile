@@ -65,7 +65,7 @@ pipeline {
 
                     echo "# updating cache to GLUON_GIT_REF=$GLUON_GIT_REF"
                     cd "$GLUON_CACHE_DIR"
-                    git fetch origin
+                    git fetch --tags origin
                     git checkout -q -f "$GLUON_GIT_REF"
                 '''
             }
@@ -88,6 +88,19 @@ pipeline {
 
                 sh '''#!/usr/bin/env bash
                     set -euo pipefail
+
+                    # Debian Buster is EOL. If the Dockerfile uses buster-slim, patch apt sources.
+                    if grep -q "debian:buster" "$GLUON_CACHE_DIR/contrib/docker/Dockerfile"; then
+                        echo "# Patching Debian Buster apt sources for archive.debian.org (EOL)"
+                        cat > "$GLUON_CACHE_DIR/sources.list" <<'EOF'
+deb http://archive.debian.org/debian buster main
+deb http://archive.debian.org/debian-security buster/updates main
+EOF
+                        if ! grep -q '^COPY sources.list /etc/apt/sources.list$' "$GLUON_CACHE_DIR/contrib/docker/Dockerfile"; then
+                            sed -i '/^FROM debian:buster-slim/a COPY sources.list /etc/apt/sources.list' "$GLUON_CACHE_DIR/contrib/docker/Dockerfile"
+                        fi
+                    fi
+
                     docker build --pull --no-cache \
                         --build-arg TARGETOS=linux \
                         --build-arg TARGETARCH="$TARGETARCH" \
