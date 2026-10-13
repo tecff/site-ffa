@@ -125,6 +125,10 @@ pipeline {
                     def safeRef = env.GLUON_GIT_REF.replaceAll('/', '-')
                     env.BUILD_IMAGE = "site-ffa-gluon-buildenv:${safeRef}"
                     env.TARGETARCH = targetArch
+                    // Deterministic container name: lets post-always (and the host
+                    // sweeper) force-remove OUR container after an abort, where the
+                    // docker client was killed before it could stop the container.
+                    env.CONTAINER_NAME = "gluon-build-${env.BUILD_TAG}".toLowerCase()
                 }
 
                 sh '''#!/usr/bin/env bash
@@ -176,6 +180,9 @@ pipeline {
                             sh """#!/usr/bin/env bash
                                 set -euo pipefail
                                 docker run --rm \
+                                    --name "\$CONTAINER_NAME" \
+                                    --init \
+                                    --stop-timeout 30 \
                                     ${env.DOCKER_USER_ARG} \
                                     -e HOME=/gluon \
                                     ${gitSafeDir} \
@@ -191,6 +198,9 @@ pipeline {
                         sh """#!/usr/bin/env bash
                             set -euo pipefail
                             docker run --rm \
+                                --name "\$CONTAINER_NAME" \
+                                --init \
+                                --stop-timeout 30 \
                                 ${env.DOCKER_USER_ARG} \
                                 -e HOME=/gluon \
                                 ${gitSafeDir} \
@@ -208,6 +218,16 @@ pipeline {
 
     post {
         always {
+            // Aborted builds: Jenkins SIGTERMs (then SIGKILLs) the sh step's process
+            // tree. A SIGKILLed docker client cannot stop its container, so the
+            // build container would keep compiling forever. Declarative post-always
+            // still runs on ABORTED, giving us a reliable place to force-remove it
+            // by its deterministic name (no-op after a clean exit thanks to --rm).
+            sh '''
+                if [ -n "${CONTAINER_NAME:-}" ]; then
+                    docker rm -f "$CONTAINER_NAME" 2>/dev/null || true
+                fi
+            '''
             archiveArtifacts artifacts: 'output/**', allowEmptyArchive: true, fingerprint: true
             // The ref-keyed build-env image is intentionally KEPT so later builds and
             // sibling jobs reuse it. Superseded ref tags accumulate (~1 GB each);
