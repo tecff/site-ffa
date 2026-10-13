@@ -74,6 +74,29 @@ pipeline {
         stage('Build build-env image') {
             steps {
                 script {
+                    // --- Rootless Docker support ---------------------------------------------------
+                    // Fall back to the rootless socket if the default daemon is unreachable
+                    // (Jenkins sh steps do not inherit the systemd user session environment).
+                    if (sh(script: 'docker info >/dev/null 2>&1', returnStatus: true) != 0) {
+                        def uid = sh(returnStdout: true, script: 'id -u').trim()
+                        env.XDG_RUNTIME_DIR = "/run/user/${uid}"
+                        env.DOCKER_HOST = "unix://${env.XDG_RUNTIME_DIR}/docker.sock"
+                    }
+                    sh 'docker info >/dev/null 2>&1 || { echo "ERROR: no usable Docker daemon (default and rootless socket tried)"; exit 1; }'
+
+                    // In rootless mode the user namespace maps container uid 0 to the host user,
+                    // so an explicit --user would resolve to an unmapped subordinate uid and break
+                    // volume permissions. Drop it for rootless, keep it for rootful daemons.
+                    def isRootless = sh(script: 'docker info 2>/dev/null | grep -q rootless', returnStatus: true) == 0
+                    echo "Docker rootless mode: ${isRootless}"
+                    if (isRootless) {
+                        env.DOCKER_USER_ARG = ''
+                    } else {
+                        def uid = sh(returnStdout: true, script: 'id -u').trim()
+                        def gid = sh(returnStdout: true, script: 'id -g').trim()
+                        env.DOCKER_USER_ARG = "--user ${uid}:${gid}"
+                    }
+
                     def hostArch = sh(returnStdout: true, script: 'uname -m').trim()
                     def targetArch = (hostArch == 'x86_64') ? 'amd64' :
                                      (hostArch == 'aarch64') ? 'arm64' :
@@ -121,7 +144,7 @@ pipeline {
                             sh """#!/usr/bin/env bash
                                 set -euo pipefail
                                 docker run --rm \
-                                    --user \$(id -u):\$(id -g) \
+                                    ${env.DOCKER_USER_ARG} \
                                     -e HOME=/gluon \
                                     -v "\$WORKSPACE":/gluon \
                                     ${cacheMount} \
@@ -135,7 +158,7 @@ pipeline {
                         sh """#!/usr/bin/env bash
                             set -euo pipefail
                             docker run --rm \
-                                --user \$(id -u):\$(id -g) \
+                                ${env.DOCKER_USER_ARG} \
                                 -e HOME=/gluon \
                                 -v "\$WORKSPACE":/gluon \
                                 ${cacheMount} \
