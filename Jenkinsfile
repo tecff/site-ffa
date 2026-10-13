@@ -11,11 +11,19 @@ pipeline {
         GLUON_CACHE_BASE = '/var/lib/jenkins/gluon-build-cache'
     }
 
+    // ── Parameter design ────────────────────────────────────────────────
+    // Only JOBS is declared here because it's the only truly uniform knob.
+    // The other build parameters (GLUON_TARGETS, GLUON_AUTOUPDATER_BRANCH,
+    // SIGN_BUILD, BROKEN, GLUON_DEPRECATED) VARY PER JOB and are therefore
+    // defined in each job's config.xml (ParameterDefinitions). Declaring
+    // them here would make Jenkins' declarative-pipeline reconciliation
+    // RESET every job's per-job default back to the Jenkinsfile default on
+    // each run — silently producing wrong builds (e.g. a per-target job
+    // building ALL targets). The pipeline body still consumes them via
+    // params.*, null-safe, so jobs that don't define a given param simply
+    // get its implicit falsy/empty behaviour.
     parameters {
-        string(name: 'GLUON_TARGETS', defaultValue: '', description: 'Optional: override GLUON_TARGETS (space-separated). Empty = use Makefile defaults.')
-        string(name: 'GLUON_AUTOUPDATER_BRANCH', defaultValue: 'experimental', description: 'Autoupdater branch (e.g. experimental, stable). Required when SIGN_BUILD=true.')
         string(name: 'JOBS', defaultValue: '', description: 'Parallel make jobs (e.g. 9). Empty = auto-detect from /proc/cpuinfo.')
-        booleanParam(name: 'SIGN_BUILD', defaultValue: false, description: 'Sign the autoupdater manifest. Requires gluon-secret-key credential in Jenkins.')
     }
 
     stages {
@@ -145,12 +153,19 @@ EOF
                     }
 
                     def jobsFlag = params.JOBS?.trim() ? "-j${params.JOBS.trim()}" : ''
+                    def makeFlags = "${jobsFlag} --output-sync=recurse".trim()
                     def makeVars = "V=s BUILD_LOG=1"
                     if (params.GLUON_TARGETS?.trim()) {
                         makeVars += " GLUON_TARGETS='${params.GLUON_TARGETS.trim()}'"
                     }
                     if (params.GLUON_AUTOUPDATER_BRANCH?.trim()) {
                         makeVars += " GLUON_AUTOUPDATER_BRANCH='${params.GLUON_AUTOUPDATER_BRANCH.trim()}'"
+                    }
+                    if (params.BROKEN) {
+                        makeVars += ' BROKEN=1'
+                    }
+                    if (params.GLUON_DEPRECATED?.trim()) {
+                        makeVars += " GLUON_DEPRECATED='${params.GLUON_DEPRECATED.trim()}'"
                     }
                     def makeTarget = params.SIGN_BUILD ? 'sign' : 'all'
                     def cacheMount = '-v "$GLUON_CACHE_DIR":/gluon/gluon-build --tmpfs /tmp'
@@ -171,7 +186,7 @@ EOF
                                     -v "\$SECRET_KEY_PATH":/run/secrets/gluon-secret-key:ro \
                                     -w /gluon \
                                     "\$BUILD_IMAGE" \
-                                    bash -lc "set -euo pipefail; make ${jobsFlag} ${makeVars} SECRET_KEY_FILE=/run/secrets/gluon-secret-key ${makeTarget}"
+                                    bash -lc "set -euo pipefail; make ${makeFlags} ${makeVars} SECRET_KEY_FILE=/run/secrets/gluon-secret-key ${makeTarget}"
                             """
                         }
                     } else {
@@ -185,7 +200,7 @@ EOF
                                 ${cacheMount} \
                                 -w /gluon \
                                 "\$BUILD_IMAGE" \
-                                bash -lc "set -euo pipefail; make ${jobsFlag} ${makeVars} ${makeTarget}"
+                                bash -lc "set -euo pipefail; make ${makeFlags} ${makeVars} ${makeTarget}"
                         """
                     }
                 }
