@@ -151,6 +151,9 @@ EOF
                     }
                     def makeTarget = params.SIGN_BUILD ? 'sign' : 'all'
                     def cacheMount = '-v "$GLUON_CACHE_DIR":/gluon/gluon-build --tmpfs /tmp'
+                    // Rootless bind mounts expose the raw host uid, making git refuse to operate
+                    // on the checked-out repo ("dubious ownership"). Trust it via env-var config.
+                    def gitSafeDir = '-e GIT_CONFIG_COUNT=1 -e GIT_CONFIG_KEY_0=safe.directory -e GIT_CONFIG_VALUE_0=/gluon/gluon-build'
 
                     if (params.SIGN_BUILD) {
                         withCredentials([file(credentialsId: 'gluon-secret-key', variable: 'SECRET_KEY_PATH')]) {
@@ -159,6 +162,7 @@ EOF
                                 docker run --rm \
                                     ${env.DOCKER_USER_ARG} \
                                     -e HOME=/gluon \
+                                    ${gitSafeDir} \
                                     -v "\$WORKSPACE":/gluon \
                                     ${cacheMount} \
                                     -v "\$SECRET_KEY_PATH":/run/secrets/gluon-secret-key:ro \
@@ -173,6 +177,7 @@ EOF
                             docker run --rm \
                                 ${env.DOCKER_USER_ARG} \
                                 -e HOME=/gluon \
+                                ${gitSafeDir} \
                                 -v "\$WORKSPACE":/gluon \
                                 ${cacheMount} \
                                 -w /gluon \
