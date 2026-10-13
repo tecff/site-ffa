@@ -115,15 +115,23 @@ pipeline {
                     if (targetArch == null) {
                         error("Unsupported build node arch: ${hostArch}. Map it to Docker TARGETARCH first.")
                     }
-                    def safeTag = env.BUILD_TAG.replaceAll('[^a-zA-Z0-9._-]', '-')
-                    env.BUILD_IMAGE = "site-ffa-gluon-buildenv:${safeTag}"
+                    // Reusable, content-keyed image tag: one image per pinned gluon ref,
+                    // shared by consecutive builds AND sibling jobs on the same branch
+                    // (their Makefiles pin the same GLUON_GIT_REF). Deliberately no arch
+                    // component: this build host is single-arch (anything else fails
+                    // above); TARGETARCH still reaches the build via --build-arg.
+                    // GLUON_GIT_REF is validated upstream to [0-9a-zA-Z._-]; the '/'
+                    // substitution is defensive in case that validation ever loosens.
+                    def safeRef = env.GLUON_GIT_REF.replaceAll('/', '-')
+                    env.BUILD_IMAGE = "site-ffa-gluon-buildenv:${safeRef}"
                     env.TARGETARCH = targetArch
                 }
 
                 sh '''#!/usr/bin/env bash
                     set -euo pipefail
-
                     # Debian Buster is EOL. If the Dockerfile uses buster-slim, patch apt sources.
+                    # The patch is idempotent (guard before sed), so the Dockerfile text is
+                    # stable across builds and the layer cache stays effective.
                     if grep -q "debian:buster" "$GLUON_CACHE_DIR/contrib/docker/Dockerfile"; then
                         echo "# Patching Debian Buster apt sources for archive.debian.org (EOL)"
                         cat > "$GLUON_CACHE_DIR/sources.list" <<'EOF'
@@ -135,7 +143,13 @@ EOF
                         fi
                     fi
 
-                    docker build --pull --no-cache \
+                    # --pull keeps the base image fresh: when the upstream digest moves,
+                    # the cache busts automatically and the apt layer rebuilds with
+                    # current packages. No --no-cache: with the ref-keyed tag, repeats
+                    # of the same ref are a near no-op thanks to the layer cache.
+                    # (For buster the base is frozen upstream, so in practice the cache
+                    # only busts when the gluon Dockerfile itself changes.)
+                    docker build --pull \
                         --build-arg TARGETOS=linux \
                         --build-arg TARGETARCH="$TARGETARCH" \
                         -t "$BUILD_IMAGE" \
@@ -211,7 +225,9 @@ EOF
     post {
         always {
             archiveArtifacts artifacts: 'output/**', allowEmptyArchive: true, fingerprint: true
-            sh 'docker rmi -f "$BUILD_IMAGE" >/dev/null 2>&1 || true'
+            // The ref-keyed build-env image is intentionally KEPT so later builds and
+            // sibling jobs reuse it. Superseded ref tags accumulate (~1 GB each);
+            // prune old site-ffa-gluon-buildenv:* tags periodically on the host.
             emailext(
                 to: '$DEFAULT_RECIPIENTS',
                 recipientProviders: [requestor()],
