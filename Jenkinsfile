@@ -84,13 +84,16 @@ pipeline {
                     }
                     sh 'docker info >/dev/null 2>&1 || { echo "ERROR: no usable Docker daemon (default and rootless socket tried)"; exit 1; }'
 
-                    // In rootless mode the user namespace maps container uid 0 to the host user,
-                    // so an explicit --user would resolve to an unmapped subordinate uid and break
-                    // volume permissions. Drop it for rootless, keep it for rootful daemons.
+                    // In rootless mode the user namespace maps container uid 0 to the host user
+                    // (jenkins), which owns the bind-mounted cache. The gluon Dockerfile declares
+                    // `USER gluon` (uid 100), which in rootless mode maps to an unmapped subordinate
+                    // host uid and would have no write access to the cache. Override it with
+                    // --user 0:0 so the container runs as the mapped-to-jenkins user.
+                    // For rootful daemons keep the historical behaviour (--user <host uid>:<gid>).
                     def isRootless = sh(script: 'docker info 2>/dev/null | grep -q rootless', returnStatus: true) == 0
                     echo "Docker rootless mode: ${isRootless}"
                     if (isRootless) {
-                        env.DOCKER_USER_ARG = ''
+                        env.DOCKER_USER_ARG = '--user 0:0'
                     } else {
                         def uid = sh(returnStdout: true, script: 'id -u').trim()
                         def gid = sh(returnStdout: true, script: 'id -g').trim()
