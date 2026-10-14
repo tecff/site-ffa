@@ -230,7 +230,7 @@ pipeline {
                     docker rm -f "$CONTAINER_NAME" 2>/dev/null || true
                 fi
             '''
-            archiveArtifacts artifacts: 'output/**', allowEmptyArchive: true, fingerprint: true
+            archiveArtifacts artifacts: 'output/**', allowEmptyArchive: true
             // The ref-keyed build-env image is intentionally KEPT so later builds and
             // sibling jobs reuse it. Superseded ref tags accumulate (~1 GB each);
             // prune old site-ffa-gluon-buildenv:* tags periodically on the host.
