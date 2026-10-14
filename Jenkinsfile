@@ -185,6 +185,7 @@ pipeline {
                                     --stop-timeout 30 \
                                     ${env.DOCKER_USER_ARG} \
                                     -e HOME=/gluon \
+                                    -e FORCE_UNSAFE_CONFIGURE=1 \
                                     ${gitSafeDir} \
                                     -v "\$WORKSPACE":/gluon \
                                     ${cacheMount} \
@@ -203,6 +204,7 @@ pipeline {
                                 --stop-timeout 30 \
                                 ${env.DOCKER_USER_ARG} \
                                 -e HOME=/gluon \
+                                -e FORCE_UNSAFE_CONFIGURE=1 \
                                 ${gitSafeDir} \
                                 -v "\$WORKSPACE":/gluon \
                                 ${cacheMount} \
