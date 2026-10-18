@@ -83,14 +83,20 @@ pipeline {
             steps {
                 script {
                     // --- Rootless Docker support ---------------------------------------------------
-                    // Fall back to the rootless socket if the default daemon is unreachable
-                    // (Jenkins sh steps do not inherit the systemd user session environment).
-                    if (sh(script: 'docker info >/dev/null 2>&1', returnStatus: true) != 0) {
-                        def uid = sh(returnStdout: true, script: 'id -u').trim()
+                    // POLICY: prefer the user-session (rootless) daemon whenever its socket
+                    // exists; only fall back to the system daemon otherwise. Do NOT probe
+                    // the default socket first: on this host the jenkins user's docker-group
+                    // membership varies with JVM generation, so a default-socket probe would
+                    // silently flip builds to the rootful daemon after a Jenkins restart.
+                    def uid = sh(returnStdout: true, script: 'id -u').trim()
+                    def rootlessSock = "/run/user/${uid}/docker.sock"
+                    if (sh(script: "[ -S '${rootlessSock}' ]", returnStatus: true) == 0) {
                         env.XDG_RUNTIME_DIR = "/run/user/${uid}"
-                        env.DOCKER_HOST = "unix://${env.XDG_RUNTIME_DIR}/docker.sock"
+                        env.DOCKER_HOST = "unix://${rootlessSock}"
+                    } else {
+                        echo "No rootless socket at ${rootlessSock}; using default Docker daemon."
                     }
-                    sh 'docker info >/dev/null 2>&1 || { echo "ERROR: no usable Docker daemon (default and rootless socket tried)"; exit 1; }'
+                    sh 'docker info >/dev/null 2>&1 || { echo "ERROR: no usable Docker daemon (rootless socket and default tried)"; exit 1; }'
 
                     // In rootless mode the user namespace maps container uid 0 to the host user
                     // (jenkins), which owns the bind-mounted cache. The gluon Dockerfile declares
@@ -103,7 +109,7 @@ pipeline {
                     if (isRootless) {
                         env.DOCKER_USER_ARG = '--user 0:0'
                     } else {
-                        def uid = sh(returnStdout: true, script: 'id -u').trim()
+                        uid = sh(returnStdout: true, script: 'id -u').trim()
                         def gid = sh(returnStdout: true, script: 'id -g').trim()
                         env.DOCKER_USER_ARG = "--user ${uid}:${gid}"
                     }
