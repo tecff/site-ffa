@@ -73,12 +73,24 @@ info:
 	@echo '#########################'
 	@echo
 
+# ramips-mt7620, ramips-mt7621 and ramips-mt76x8 share
+# build_dir/target-mipsel_24kc_musl. mt76x8 is a SMALL_FLASH target and
+# builds procd without PIE while the other two use PIE; a stale CMakeCache
+# would relink the old non-PIC objects as PIE (R_MIPS16_26 errors). Remove
+# the procd build directories so procd is always rebuilt with the flags of
+# the current target.
 build: info gluon-prepare
 	@echo '# starting builds...'
-	+for target in ${GLUON_TARGETS}; do \
+	+failed=""; \
+	for target in ${GLUON_TARGETS}; do \
 		echo ""Building target $$target""; \
-		$(MAKE) ${GLUON_MAKEFLAGS} GLUON_TARGET="$$target"; \
-	done
+		rm -rf ${GLUON_BUILD_DIR}/openwrt/build_dir/target-*/procd-*; \
+		$(MAKE) ${GLUON_MAKEFLAGS} GLUON_TARGET="$$target" || failed="$$failed $$target"; \
+	done; \
+	if [ -n "$$failed" ]; then \
+		echo "# build failed for target(s):$$failed"; \
+		exit 1; \
+	fi
 
 manifest:
 	@echo '# creating manifest...'
