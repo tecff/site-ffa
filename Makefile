@@ -123,10 +123,15 @@ gluon-patch:
 
 clean:
 	@echo '# starting clean...'
-	+for target in ${GLUON_TARGETS}; do \
+	+failed=""; \
+	for target in ${GLUON_TARGETS}; do \
 		echo ""Cleaning target $$target""; \
-		$(MAKE) -C ${GLUON_BUILD_DIR} clean GLUON_TARGET="$$target"; \
-	done
+		$(MAKE) -C ${GLUON_BUILD_DIR} clean GLUON_TARGET="$$target" || failed="$$failed $$target"; \
+	done; \
+	if [ -n "$$failed" ]; then \
+		echo "# clean failed for target(s):$$failed"; \
+		exit 1; \
+	fi
 
 gluon-clean:
 	@echo '# removing build directory...'
