@@ -28,7 +28,6 @@ ifneq (,$(BROKEN))
   GLUON_TARGETS += \
 	bcm27xx-bcm2710 \
 	mvebu-cortexa9 \
-	ramips-rt305x \
 	sunxi-cortexa7 \
 	x86-generic \
 	x86-geode \
