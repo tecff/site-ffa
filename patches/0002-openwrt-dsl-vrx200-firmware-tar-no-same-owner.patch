@@ -1,0 +1,36 @@
+diff --git a/patches/openwrt/0014-firmware-dsl-vrx200-firmware-xdsl-extract-tarballs-with-no-same-owner.patch b/patches/openwrt/0014-firmware-dsl-vrx200-firmware-xdsl-extract-tarballs-with-no-same-owner.patch
+new file mode 100644
+index 0000000..da23cf7
+--- /dev/null
++++ b/patches/openwrt/0014-firmware-dsl-vrx200-firmware-xdsl-extract-tarballs-with-no-same-owner.patch
+@@ -0,0 +1,30 @@
++From: Andreas Ziegler <dev@andreas-ziegler.de>
++Date: Tue, 24 Nov 2026 18:45:00 +0100
++Subject: firmware: dsl-vrx200-firmware-xdsl: extract tarballs with --no-same-owner
++
++The repacked VR9 firmware tarballs store the original packer's uid/gid
++(11609555/2222). When the build runs inside a user namespace, e.g. in
++rootless Docker containers, restoring that ownership fails with EINVAL
++because the uid is not mappable there; GNU tar then exits non-zero and
++the package build fails.
++
++Restoring the original ownership of these firmware blobs serves no
++purpose, so pass --no-same-owner to the tar invocations.
++
++Signed-off-by: Andreas Ziegler <dev@andreas-ziegler.de>
++
++diff --git a/package/firmware/lantiq/dsl-vrx200-firmware-xdsl/Makefile b/package/firmware/lantiq/dsl-vrx200-firmware-xdsl/Makefile
++index b6e1d11..4e20869 100644
++--- a/package/firmware/lantiq/dsl-vrx200-firmware-xdsl/Makefile
+++++ b/package/firmware/lantiq/dsl-vrx200-firmware-xdsl/Makefile
++@@ -86,8 +86,8 @@ endef
++ define Build/Prepare
++ 	rm -rf $(PKG_BUILD_DIR)
++ 	mkdir -p $(PKG_BUILD_DIR)
++-	$(TAR) -C $(PKG_BUILD_DIR) -xzf $(DL_DIR)/$(PKG_SOURCE)
++-	$(TAR) -C $(PKG_BUILD_DIR) -xzf $(DL_DIR)/$(PKG_B_SOURCE)
+++	$(TAR) --no-same-owner -C $(PKG_BUILD_DIR) -xzf $(DL_DIR)/$(PKG_SOURCE)
+++	$(TAR) --no-same-owner -C $(PKG_BUILD_DIR) -xzf $(DL_DIR)/$(PKG_B_SOURCE)
++ endef
++ 
++ define Build/Compile
