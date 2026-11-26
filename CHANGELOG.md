@@ -1,5 +1,45 @@
 # Freifunk Altdorf Firmware Changelog
 
+## v14
+
+Update to Gluon v2025.1.x (see upstream release notes!)
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2023.2.html
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2023.2.1.html
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2023.2.2.html
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2023.2.3.html
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2023.2.4.html
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2023.2.5.html
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2023.2.6.html
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2025.1.html
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2025.1.1.html
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2025.1.2.html
+ - https://gluon.readthedocs.io/en/v2025.1.x/releases/v2025.1.3.html
+ - additional bugfixes committed after v2025.1.3
+
+Targets:
+ - add mediatek-filogic
+ - remove TP-Link RE305, no longer supported by Gluon
+ - drop the ramips-rt305x target (has not built since the 2023 switch to upstream Gluon)
+
+Site:
+ - migrate site to the Gluon 2023.2.x image customization
+ - remove obsolete packages
+ - reduce package set on some small-flash devices (Archer C50 v6, TL-WR902AC v4)
+ - update tecff feed: fixes in autoupdater-wifi-fallback and ssid-changer
+
+Known limitations:
+ - Archer C60: no factory images in this release (upstream OpenWrt bug in
+   the image builder; sysupgrade images and already installed devices are
+   not affected, but first-time installation from stock firmware is not
+   possible until the fix arrives upstream)
+
+Build infrastructure:
+ - new Jenkins pipeline with a Docker-based build environment (including
+   rootless Docker support)
+ - Makefile: fail cleanly on broken targets, rebuild procd per target
+ - carry OpenWrt fix: extract the VR9 DSL firmware tarballs with
+   --no-same-owner (lantiq-xrx200 builds failed in rootless Docker)
+
 ## v13
 
 This release is only available for devices with more than 4MB of flash.
